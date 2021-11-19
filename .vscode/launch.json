@@ -1,0 +1,49 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'rust-end-to-end-application'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=rust-end-to-end-application",
+                    "--package=rust-end-to-end-application"
+                ],
+                "filter": {
+                    "name": "rust-end-to-end-application",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "RUST_BACKTRACE": "1",
+                "RUST_LOG": "rust_end_to_end_application=trace"
+            }
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'rust-end-to-end-application'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=rust-end-to-end-application",
+                    "--package=rust-end-to-end-application"
+                ],
+                "filter": {
+                    "name": "rust-end-to-end-application",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
