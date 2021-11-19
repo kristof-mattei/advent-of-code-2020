@@ -17,7 +17,7 @@ fn read_file() -> Result<Vec<String>, std::io::Error> {
         .map(|f| f.to_owned())
         .collect();
 
-    return Ok(split);
+    Ok(split)
 }
 
 fn find_sum_is_2020(numbers: Vec<u32>) -> Option<(u32, u32)> {
@@ -50,7 +50,7 @@ pub fn day_1_part_1() -> Result<u32, Box<dyn std::error::Error>> {
         message: "Didn't find a sum of x + y = 2020".to_string(),
     })?;
 
-    return Ok(entry1 * entry2);
+    Ok(entry1 * entry2)
 }
 
 #[test]
