@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use crate::{
     shared::{AoCError, AoCResult},
     utils::read_file,
@@ -11,33 +13,20 @@ fn calculate_permutations(input: &[u32]) -> u64 {
 
     copy.push(input.iter().max().unwrap() + 3);
 
-    println!("Max index {}", input.len());
-    calculate_permutations_r(&copy, 0)
-}
+    copy.reverse();
 
-fn calculate_permutations_r(input: &[u32], index: usize) -> u64 {
-    let current = input.get(index).unwrap();
+    let mut index_edges: HashMap<usize, u32> = HashMap::new();
 
-    let mut possible_permutations: u64 = 0;
+    for slice in copy.windows(3) {
+        // slice has a length of 3
 
-    if input.get(index + 1).is_none() {
-        // end of the line, valid
-        return 1;
-    }
-
-    for i in 1..=3 {
-        let next_possible_index = index + i;
-
-        if let Some(next) = input.get(next_possible_index) {
-            if next - current <= 3 {
-                possible_permutations += calculate_permutations_r(input, next_possible_index);
-            }
+        match slice.get(0).unwrap() {
+            1 => 1,
+            3 => 
         }
     }
 
-    println!("possible_permutations: {}", possible_permutations);
-
-    possible_permutations
+    0
 }
 
 // https://adventofcode.com/2020/day/9
@@ -60,6 +49,17 @@ mod tests {
         // assert_eq!(AoCResult::Ofu32(1820), find_solution().unwrap());
     }
 
+    #[test]
+    fn test_example_0() {
+        let input: Vec<u32> = vec!["1", "2", "3", "5", "6"]
+            .iter()
+            .map(|s| s.parse::<u32>().unwrap())
+            .collect();
+
+        let permutations = calculate_permutations(&input);
+
+        assert_eq!(8, permutations);
+    }
     #[test]
     fn test_example_1() {
         let input: Vec<u32> = vec!["16", "10", "15", "5", "1", "11", "7", "19", "6", "12", "4"]
