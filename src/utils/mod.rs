@@ -1,4 +1,4 @@
-use std::{fs::File, io::Read, path::PathBuf};
+use std::{convert::Into, fs::File, io::Read, path::PathBuf};
 
 pub fn read_file(path_to_file: PathBuf) -> Result<Vec<String>, std::io::Error> {
     let mut file = File::open(path_to_file)?; // nasty path resolve
@@ -6,5 +6,5 @@ pub fn read_file(path_to_file: PathBuf) -> Result<Vec<String>, std::io::Error> {
 
     file.read_to_string(&mut contents)?;
 
-    Ok(contents.lines().map(|s| s.into()).collect())
+    Ok(contents.lines().map(Into::into).collect())
 }

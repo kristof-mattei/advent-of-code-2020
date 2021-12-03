@@ -1,6 +1,5 @@
-use crate::{shared::AoCResult, utils::read_file};
-use core::fmt;
-use std::{cell::RefCell, collections::HashMap, rc::Rc};
+use crate::utils::read_file;
+use std::{cell::RefCell, collections::HashMap, fmt, rc::Rc};
 
 #[derive(Default, Debug)]
 pub struct Bag {
@@ -135,13 +134,13 @@ fn count_parents(bag_parsed: &HashMap<String, Rc<Bag>>, start: &str) -> u32 {
 }
 
 // https://adventofcode.com/2020/day/7
-pub fn find_solution() -> Result<AoCResult, Box<dyn std::error::Error>> {
+pub fn find_solution() -> Result<u32, Box<dyn std::error::Error>> {
     const BAG_NAME: &str = "shiny gold";
     let split = read_file("./src/day_7/input.txt".into())?;
 
     let bags = parse_bags(&split);
 
-    Ok(AoCResult::Ofu32(count_parents(&bags, BAG_NAME)))
+    Ok(count_parents(&bags, BAG_NAME))
 }
 
 #[cfg(test)]
@@ -150,7 +149,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(AoCResult::Ofu32(272), find_solution().unwrap());
+        assert_eq!(272, find_solution().unwrap());
     }
 
     #[test]
@@ -305,7 +304,7 @@ mod tests {
             "dotted black bags contain no other bags.",
         ];
 
-        let lines: Vec<String> = input.map(|s| s.into()).into();
+        let lines: Vec<String> = input.map(Into::into).into();
 
         let rst = count_parents(&parse_bags(&lines), "shiny gold");
 

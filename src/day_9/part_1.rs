@@ -1,12 +1,9 @@
 use std::collections::HashMap;
 
-use crate::{
-    shared::{AoCError, AoCResult},
-    utils::read_file,
-};
+use crate::utils::read_file;
 
 // taken from day_1 and modified
-fn find_sum_of_2_is_x(numbers: &[u64], target: u64) -> Result<(), AoCError> {
+fn find_sum_of_2_is_x(numbers: &[u64], target: u64) -> Result<(), String> {
     let mut missing_to_value: HashMap<i64, u64> = HashMap::new();
 
     for n in numbers {
@@ -20,13 +17,11 @@ fn find_sum_of_2_is_x(numbers: &[u64], target: u64) -> Result<(), AoCError> {
         }
     }
 
-    Err(AoCError {
-        message: format!(
-            "No combination found in the last {} that equals {}",
-            numbers.len(),
-            target
-        ),
-    })
+    Err(format!(
+        "No combination found in the last {} that equals {}",
+        numbers.len(),
+        target
+    ))
 }
 
 fn slide_until_sum_of_any_2_in_last_x_is_not_current_value(input: &[u64], last_x: usize) -> u64 {
@@ -54,12 +49,12 @@ fn slide_until_sum_of_any_2_in_last_x_is_not_current_value(input: &[u64], last_x
     }
 }
 // https://adventofcode.com/2020/day/9
-pub fn find_solution() -> Result<AoCResult, Box<dyn std::error::Error>> {
+pub fn find_solution() -> Result<u64, Box<dyn std::error::Error>> {
     let split = read_file("./src/day_9/input.txt".into())?;
     let input: Vec<u64> = split.iter().map(|s| s.parse::<u64>().unwrap()).collect();
 
-    Ok(AoCResult::Ofu64(
-        slide_until_sum_of_any_2_in_last_x_is_not_current_value(&input, 25),
+    Ok(slide_until_sum_of_any_2_in_last_x_is_not_current_value(
+        &input, 25,
     ))
 }
 
@@ -69,7 +64,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(AoCResult::Ofu64(138_879_426), find_solution().unwrap());
+        assert_eq!(138_879_426, find_solution().unwrap());
     }
 
     #[test]
