@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-use crate::{shared::AoCResult, utils::read_file};
+use crate::utils::read_file;
 
 #[derive(PartialEq, Debug, Clone, Copy)]
 pub enum Operation {
@@ -66,14 +66,14 @@ fn execute_until_same_line_reached(operations: &[Operation]) -> i32 {
 }
 
 // https://adventofcode.com/2020/day/8
-pub fn find_solution() -> Result<AoCResult, Box<dyn std::error::Error>> {
+pub fn find_solution() -> Result<i32, Box<dyn std::error::Error>> {
     let split = read_file("./src/day_8/input.txt".into())?;
 
     let operations = parse_lines(&split);
 
     let accumulator = execute_until_same_line_reached(&operations);
 
-    Ok(AoCResult::Ofi32(accumulator))
+    Ok(accumulator)
 }
 
 #[cfg(test)]
@@ -82,7 +82,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(AoCResult::Ofi32(1584), find_solution().unwrap());
+        assert_eq!(1584, find_solution().unwrap());
     }
 
     #[test]

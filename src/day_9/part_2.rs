@@ -1,4 +1,4 @@
-use crate::{shared::AoCResult, utils::read_file};
+use crate::utils::read_file;
 
 fn find_contiguous_set_of_numbers_that_sum_up_to(input: &[u64], target: u64) -> (u64, u64) {
     let mut offset = 0;
@@ -27,13 +27,13 @@ fn find_contiguous_set_of_numbers_that_sum_up_to(input: &[u64], target: u64) -> 
 }
 
 // https://adventofcode.com/2020/day/9
-pub fn find_solution() -> Result<AoCResult, Box<dyn std::error::Error>> {
+pub fn find_solution() -> Result<u64, Box<dyn std::error::Error>> {
     const TARGET: u64 = 138_879_426; // from day 9 part 1;
     let split = read_file("./src/day_9/input.txt".into())?;
     let input: Vec<u64> = split.iter().map(|s| s.parse::<u64>().unwrap()).collect();
 
     let (lowest, highest) = find_contiguous_set_of_numbers_that_sum_up_to(&input, TARGET);
-    Ok(AoCResult::Ofu64(lowest + highest))
+    Ok(lowest + highest)
 }
 
 #[cfg(test)]
@@ -42,7 +42,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(AoCResult::Ofu64(23_761_694), find_solution().unwrap());
+        assert_eq!(23_761_694, find_solution().unwrap());
     }
 
     #[test]

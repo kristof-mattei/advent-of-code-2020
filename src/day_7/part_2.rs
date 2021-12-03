@@ -1,4 +1,4 @@
-use crate::{day_7::part_1::parse_bags, shared::AoCResult, utils::read_file};
+use crate::{day_7::part_1::parse_bags, utils::read_file};
 use std::rc::Rc;
 
 use super::part_1::Bag;
@@ -20,15 +20,13 @@ fn count_bags_recursive(bag: &Rc<Bag>) -> u32 {
 }
 
 // https://adventofcode.com/2020/day/7
-pub fn find_solution() -> Result<AoCResult, Box<dyn std::error::Error>> {
+pub fn find_solution() -> Result<u32, Box<dyn std::error::Error>> {
     const BAG_NAME: &str = "shiny gold";
     let split = read_file("./src/day_7/input.txt".into())?;
 
     let bags = parse_bags(&split);
 
-    Ok(AoCResult::Ofu32(count_bags_recursive(
-        bags.get(BAG_NAME).unwrap(),
-    )))
+    Ok(count_bags_recursive(bags.get(BAG_NAME).unwrap()))
 }
 
 #[cfg(test)]
@@ -39,7 +37,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(AoCResult::Ofu32(172_246), find_solution().unwrap());
+        assert_eq!(172_246, find_solution().unwrap());
     }
 
     #[test]
@@ -194,7 +192,7 @@ mod tests {
             "dark violet bags contain no other bags.",
         ];
 
-        let lines: Vec<String> = input.map(|s| s.into()).into();
+        let lines: Vec<String> = input.map(Into::into).into();
 
         let bags = parse_bags(&lines);
 

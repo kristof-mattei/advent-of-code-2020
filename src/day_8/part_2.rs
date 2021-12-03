@@ -1,13 +1,10 @@
 use std::collections::HashSet;
 
-use crate::{
-    shared::{AoCError, AoCResult},
-    utils::read_file,
-};
+use crate::utils::read_file;
 
 use super::part_1::{parse_lines, Operation};
 
-fn execute_until_same_line_reached(operations: &[Operation]) -> Result<i32, AoCError> {
+fn execute_until_same_line_reached(operations: &[Operation]) -> Result<i32, String> {
     let length = operations.len();
 
     let mut has_visited: HashSet<usize> = HashSet::new();
@@ -23,9 +20,7 @@ fn execute_until_same_line_reached(operations: &[Operation]) -> Result<i32, AoCE
         index = index.wrapping_rem_euclid(length as i32);
 
         if !has_visited.insert(index as usize) {
-            return Err(AoCError {
-                message: "Program did not terminate".to_string(),
-            });
+            return Err("Program did not terminate".into());
         };
 
         match operations.get(index as usize) {
@@ -47,7 +42,7 @@ fn execute_until_same_line_reached(operations: &[Operation]) -> Result<i32, AoCE
 }
 
 // https://adventofcode.com/2020/day/8
-pub fn find_solution() -> Result<AoCResult, Box<dyn std::error::Error>> {
+pub fn find_solution() -> Result<i32, Box<dyn std::error::Error>> {
     let split = read_file("./src/day_8/input.txt".into())?;
 
     let operations = parse_lines(&split);
@@ -65,14 +60,12 @@ pub fn find_solution() -> Result<AoCResult, Box<dyn std::error::Error>> {
         let beginning = build_new_vector(&operations, to_swap_index);
 
         match execute_until_same_line_reached(&beginning) {
-            Ok(acc) => return Ok(AoCResult::Ofi32(acc)),
+            Ok(acc) => return Ok(acc),
             _ => continue,
         }
     }
 
-    Err(Box::new(AoCError {
-        message: "No non-terminating combination found".to_string(),
-    }))
+    Err("No non-terminating combination found".into())
 }
 
 fn build_new_vector(operations: &[Operation], to_swap_index: usize) -> Vec<Operation> {
@@ -105,7 +98,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(AoCResult::Ofi32(920), find_solution().unwrap());
+        assert_eq!(920, find_solution().unwrap());
     }
 
     #[test]
