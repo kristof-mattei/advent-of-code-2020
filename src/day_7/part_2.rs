@@ -1,4 +1,4 @@
-use crate::day_7::part_1::parse_bags;
+use crate::{day_7::part_1::parse_bags, utils::read_file};
 use std::rc::Rc;
 
 use super::part_1::Bag;
@@ -20,13 +20,13 @@ fn count_bags_recursive(bag: &Rc<Bag>) -> u32 {
 }
 
 // https://adventofcode.com/2020/day/7
-pub fn find_solution() -> u32 {
+pub fn find_solution() -> Result<u32, Box<dyn std::error::Error>> {
     const BAG_NAME: &str = "shiny gold";
     let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
 
     let bags = parse_bags(&lines);
 
-    count_bags_recursive(bags.get(BAG_NAME).unwrap())
+    Ok(count_bags_recursive(bags.get(BAG_NAME).unwrap()))
 }
 
 #[cfg(test)]
@@ -37,7 +37,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(172_246, find_solution());
+        assert_eq!(172_246, find_solution().unwrap());
     }
 
     #[test]
@@ -192,7 +192,7 @@ mod tests {
             "dark violet bags contain no other bags.",
         ];
 
-        let lines: Vec<String> = input.map(|s| s.into()).into();
+        let lines: Vec<String> = input.map(Into::into).into();
 
         let bags = parse_bags(&lines);
 

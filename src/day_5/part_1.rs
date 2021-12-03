@@ -1,3 +1,5 @@
+use crate::utils::read_file;
+
 fn parse_seat(seat_line: &str) -> (u32, u32) {
     const LOWER_BITS_ROW: u32 = 0;
     const UPPER_BITS_ROW: u32 = LOWER_BITS_ROW + 6;
@@ -29,8 +31,8 @@ fn parse_seat(seat_line: &str) -> (u32, u32) {
 }
 
 // https://adventofcode.com/2020/day/5
-pub fn find_solution() -> u32 {
-    let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+pub fn find_solution() -> Result<u32, Box<dyn std::error::Error>> {
+    let split = read_file("./src/day_5/input.txt".into())?;
 
     let max = lines
         .iter()
@@ -39,7 +41,7 @@ pub fn find_solution() -> u32 {
         .max()
         .unwrap();
 
-    max
+    Ok(max)
 }
 
 #[cfg(test)]
@@ -48,7 +50,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(951, find_solution())
+        assert_eq!(951, find_solution().unwrap());
     }
 
     #[test]

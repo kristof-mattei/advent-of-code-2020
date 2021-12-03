@@ -1,3 +1,5 @@
+use crate::utils::read_file;
+
 fn descent_and_go_right(
     lines: &[String],
     row: usize,
@@ -26,8 +28,8 @@ fn descent_and_go_right(
 }
 
 // https://adventofcode.com/2020/day/3
-pub fn find_solution() -> u32 {
-    let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+pub fn find_solution() -> Result<u32, Box<dyn std::error::Error>> {
+    let split = read_file("./src/day_3/input.txt".into())?;
 
     let result1 = descent_and_go_right(&lines, 0, 0, 0, 1, 1);
     let result2 = descent_and_go_right(&lines, 0, 0, 0, 1, 3);
@@ -35,7 +37,7 @@ pub fn find_solution() -> u32 {
     let result4 = descent_and_go_right(&lines, 0, 0, 0, 1, 7);
     let result5 = descent_and_go_right(&lines, 0, 0, 0, 2, 1);
 
-    result1 * result2 * result3 * result4 * result5
+    Ok(result1 * result2 * result3 * result4 * result5)
 }
 
 #[cfg(test)]
@@ -44,6 +46,6 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(1_478_615_040, find_solution());
+        assert_eq!(1_478_615_040, find_solution().unwrap());
     }
 }

@@ -1,3 +1,5 @@
+use crate::utils::read_file;
+
 fn find_contiguous_set_of_numbers_that_sum_up_to(input: &[u64], target: u64) -> (u64, u64) {
     let mut offset = 0;
     let mut to_take = 2;
@@ -25,13 +27,13 @@ fn find_contiguous_set_of_numbers_that_sum_up_to(input: &[u64], target: u64) -> 
 }
 
 // https://adventofcode.com/2020/day/9
-pub fn find_solution() -> u64 {
+pub fn find_solution() -> Result<u64, Box<dyn std::error::Error>> {
     const TARGET: u64 = 138_879_426; // from day 9 part 1;
     let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
     let input: Vec<u64> = lines.iter().map(|s| s.parse::<u64>().unwrap()).collect();
 
     let (lowest, highest) = find_contiguous_set_of_numbers_that_sum_up_to(&input, TARGET);
-    lowest + highest
+    Ok(lowest + highest)
 }
 
 #[cfg(test)]
@@ -40,7 +42,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(23_761_694, find_solution());
+        assert_eq!(23_761_694, find_solution().unwrap());
     }
 
     #[test]

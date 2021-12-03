@@ -1,5 +1,7 @@
 use std::collections::HashMap;
 
+use crate::utils::read_file;
+
 // taken from day_1 and modified
 fn find_sum_of_2_is_x(numbers: &[u64], target: u64) -> Result<(), String> {
     let mut missing_to_value: HashMap<i64, u64> = HashMap::new();
@@ -47,11 +49,13 @@ fn slide_until_sum_of_any_2_in_last_x_is_not_current_value(input: &[u64], last_x
     }
 }
 // https://adventofcode.com/2020/day/9
-pub fn find_solution() -> u64 {
-    let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
-    let input: Vec<u64> = lines.iter().map(|s| s.parse::<u64>().unwrap()).collect();
+pub fn find_solution() -> Result<u64, Box<dyn std::error::Error>> {
+    let split = read_file("./src/day_9/input.txt".into())?;
+    let input: Vec<u64> = split.iter().map(|s| s.parse::<u64>().unwrap()).collect();
 
-    slide_until_sum_of_any_2_in_last_x_is_not_current_value(&input, 25)
+    Ok(slide_until_sum_of_any_2_in_last_x_is_not_current_value(
+        &input, 25,
+    ))
 }
 
 #[cfg(test)]
@@ -60,7 +64,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(138_879_426, find_solution());
+        assert_eq!(138_879_426, find_solution().unwrap());
     }
 
     #[test]

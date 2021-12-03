@@ -1,5 +1,7 @@
 use std::collections::HashSet;
 
+use crate::utils::read_file;
+
 use super::part_1::{parse_lines, Operation};
 
 fn execute_until_same_line_reached(operations: &[Operation]) -> Result<i32, String> {
@@ -40,8 +42,8 @@ fn execute_until_same_line_reached(operations: &[Operation]) -> Result<i32, Stri
 }
 
 // https://adventofcode.com/2020/day/8
-pub fn find_solution() -> i32 {
-    let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+pub fn find_solution() -> Result<i32, Box<dyn std::error::Error>> {
+    let split = read_file("./src/day_8/input.txt".into())?;
 
     let operations = parse_lines(&lines);
 
@@ -58,12 +60,12 @@ pub fn find_solution() -> i32 {
         let beginning = build_new_vector(&operations, to_swap_index);
 
         match execute_until_same_line_reached(&beginning) {
-            Ok(acc) => return acc,
+            Ok(acc) => return Ok(acc),
             _ => continue,
         }
     }
 
-    panic!("No non-terminating combination found")
+    Err("No non-terminating combination found".into())
 }
 
 fn build_new_vector(operations: &[Operation], to_swap_index: usize) -> Vec<Operation> {
@@ -96,7 +98,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(920, find_solution())
+        assert_eq!(920, find_solution().unwrap());
     }
 
     #[test]
