@@ -304,7 +304,7 @@ mod tests {
             "dotted black bags contain no other bags.",
         ];
 
-        let lines: Vec<String> = input.map(|s| s.into()).into();
+        let lines: Vec<String> = input.map(Into::into).into();
 
         let rst = count_parents(&parse_bags(&lines), "shiny gold");
 

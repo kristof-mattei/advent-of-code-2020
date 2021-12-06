@@ -28,7 +28,7 @@ fn calculate_step_up_differences(input: &[u32]) -> (u32, u32, u32) {
                     2 => stepup_2 += 1,
                     3 => stepup_3 += 1,
                     _ => {
-                        panic!("This really shouldn't happen")
+                        panic!("This really shouldn't happen");
                     }
                 }
 

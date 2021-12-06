@@ -192,7 +192,7 @@ mod tests {
             "dark violet bags contain no other bags.",
         ];
 
-        let lines: Vec<String> = input.map(|s| s.into()).into();
+        let lines: Vec<String> = input.map(Into::into).into();
 
         let bags = parse_bags(&lines);
 
