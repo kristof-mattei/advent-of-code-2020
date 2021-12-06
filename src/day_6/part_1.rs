@@ -1,5 +1,3 @@
-use crate::{shared::AoCResult, utils::read_file};
-
 fn parse_group_of_answers(group: &[String]) -> u32 {
     let mut answers: Vec<char> = Vec::new();
 
@@ -28,14 +26,14 @@ fn parse_lines_into_questionaires(lines: &[String]) -> Vec<u32> {
 }
 
 // https://adventofcode.com/2020/day/6
-pub fn find_solution() -> Result<AoCResult, Box<dyn std::error::Error>> {
-    let split = read_file("./src/day_6/input.txt".into())?;
+pub fn find_solution() -> u32 {
+    let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
 
-    let answers: u32 = parse_lines_into_questionaires(&split)
+    let answers: u32 = parse_lines_into_questionaires(&lines)
         .into_iter()
         .sum::<u32>();
 
-    Ok(AoCResult::Ofu32(answers))
+    answers
 }
 
 #[cfg(test)]
@@ -44,7 +42,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(AoCResult::Ofu32(6521), find_solution().unwrap());
+        assert_eq!(6521, find_solution())
     }
 
     #[test]

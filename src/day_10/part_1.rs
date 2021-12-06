@@ -1,7 +1,5 @@
 use core::panic;
 
-use crate::{shared::AoCResult, utils::read_file};
-
 fn calculate_step_up_differences(input: &[u32]) -> (u32, u32, u32) {
     let mut stepup_1 = 0;
     let mut stepup_2 = 0;
@@ -42,12 +40,13 @@ fn calculate_step_up_differences(input: &[u32]) -> (u32, u32, u32) {
 }
 
 // https://adventofcode.com/2020/day/9
-pub fn find_solution() -> Result<AoCResult, Box<dyn std::error::Error>> {
-    let split = read_file("./src/day_10/input.txt".into())?;
-    let input: Vec<u32> = split.iter().map(|s| s.parse::<u32>().unwrap()).collect();
+pub fn find_solution() -> u32 {
+    let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+    let input: Vec<u32> = lines.iter().map(|s| s.parse::<u32>().unwrap()).collect();
 
     let (s1, _, s3) = calculate_step_up_differences(&input);
-    Ok(AoCResult::Ofu32(s1 * s3))
+
+    s1 * s3
 }
 
 #[cfg(test)]
@@ -56,7 +55,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(AoCResult::Ofu32(1820), find_solution().unwrap());
+        assert_eq!(1820, find_solution())
     }
 
     #[test]

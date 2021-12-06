@@ -1,5 +1,3 @@
-use crate::{shared::AoCResult, utils::read_file};
-
 fn parse_seat(seat_line: &str) -> (u32, u32) {
     const LOWER_BITS_ROW: u32 = 0;
     const UPPER_BITS_ROW: u32 = LOWER_BITS_ROW + 6;
@@ -31,17 +29,17 @@ fn parse_seat(seat_line: &str) -> (u32, u32) {
 }
 
 // https://adventofcode.com/2020/day/5
-pub fn find_solution() -> Result<AoCResult, Box<dyn std::error::Error>> {
-    let split = read_file("./src/day_5/input.txt".into())?;
+pub fn find_solution() -> u32 {
+    let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
 
-    let max = split
+    let max = lines
         .iter()
         .map(|l| parse_seat(l))
         .map(|(r, c)| r * 8 + c)
         .max()
         .unwrap();
 
-    Ok(AoCResult::Ofu32(max))
+    max
 }
 
 #[cfg(test)]
@@ -50,7 +48,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(AoCResult::Ofu32(951), find_solution().unwrap());
+        assert_eq!(951, find_solution())
     }
 
     #[test]
