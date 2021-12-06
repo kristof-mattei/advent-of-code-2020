@@ -38,12 +38,12 @@ fn parse_line(line: &str) -> RuleWithPassword {
 }
 
 // https://adventofcode.com/2020/day/2
-pub fn find_solution() -> Result<u32, Box<dyn std::error::Error>> {
-    let split = read_file("./src/day_2/input.txt".into())?;
+pub fn find_solution() -> u32 {
+    let lines = include_str!("input.txt");
 
     let valid_passwords = lines
-        .into_iter()
-        .map(|s| parse_line(&s))
+        .lines()
+        .map(parse_line)
         .filter(RuleWithPassword::is_valid)
         .count();
 
@@ -56,6 +56,6 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(727, find_solution().unwrap());
+        assert_eq!(727, find_solution());
     }
 }

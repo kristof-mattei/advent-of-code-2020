@@ -149,7 +149,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(272, find_solution().unwrap());
+        assert_eq!(272, find_solution());
     }
 
     #[test]

@@ -20,13 +20,10 @@ fn find_sum_of_2_is_2020(numbers: &[u32]) -> Option<(u32, u32)> {
 }
 
 // https://adventofcode.com/2020/day/1
-pub fn find_solution() -> Result<u32, Box<dyn std::error::Error>> {
-    let split = read_file("./src/day_1/input.txt".into())?;
+pub fn find_solution() -> u32 {
+    let lines = include_str!("input.txt");
 
-    let numbers: Vec<u32> = lines
-        .into_iter()
-        .map(|s| s.parse::<u32>().unwrap())
-        .collect();
+    let numbers: Vec<u32> = lines.lines().map(|s| s.parse::<u32>().unwrap()).collect();
 
     let (entry1, entry2) = find_sum_of_2_is_2020(&numbers)
         .ok_or_else::<String, _>(|| "Didn't find a sum of x + y = 2020".into())?;

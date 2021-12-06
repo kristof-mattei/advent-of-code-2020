@@ -17,9 +17,7 @@ fn descent_and_go_right(lines: &[String], row: usize, col: usize, mut trees: u32
 pub fn find_solution() -> Result<u32, Box<dyn std::error::Error>> {
     let split = read_file("./src/day_3/input.txt".into())?;
 
-    let result = descent_and_go_right(&lines, 0, 0, 0);
-
-    Ok(result)
+    descent_and_go_right(&lines, 0, 0, 0)
 }
 
 #[cfg(test)]
@@ -28,6 +26,6 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(191, find_solution().unwrap());
+        assert_eq!(191, find_solution());
     }
 }

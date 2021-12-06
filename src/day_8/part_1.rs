@@ -71,9 +71,7 @@ pub fn find_solution() -> Result<i32, Box<dyn std::error::Error>> {
 
     let operations = parse_lines(&lines);
 
-    let accumulator = execute_until_same_line_reached(&operations);
-
-    Ok(accumulator)
+    execute_until_same_line_reached(&operations)
 }
 
 #[cfg(test)]
@@ -82,7 +80,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(1584, find_solution().unwrap());
+        assert_eq!(1584, find_solution());
     }
 
     #[test]
