@@ -1,8 +1,3 @@
-use crate::{
-    shared::{AoCError, AoCResult},
-    utils::read_file,
-};
-
 fn parse_seat(seat_line: &str) -> (u32, u32) {
     const LOWER_BITS_ROW: u32 = 0;
     const UPPER_BITS_ROW: u32 = LOWER_BITS_ROW + 6;
@@ -34,10 +29,10 @@ fn parse_seat(seat_line: &str) -> (u32, u32) {
 }
 
 // https://adventofcode.com/2020/day/5
-pub fn find_solution() -> Result<AoCResult, Box<dyn std::error::Error>> {
-    let split = read_file("./src/day_5/input.txt".into())?;
+pub fn find_solution() -> u32 {
+    let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
 
-    let mut items: Vec<u32> = split
+    let mut items: Vec<u32> = lines
         .iter()
         .map(|l| parse_seat(l))
         .map(|(r, c)| r * 8 + c)
@@ -51,15 +46,13 @@ pub fn find_solution() -> Result<AoCResult, Box<dyn std::error::Error>> {
     for i in items {
         match previous {
             Some(p) if (i - p) > 1 => {
-                return Ok(AoCResult::Ofu32(p + 1));
+                return p + 1;
             }
             _ => previous = Some(i),
         }
     }
 
-    Err(Box::new(AoCError {
-        message: "Couldn't find item".into(),
-    }))
+    panic!("Couldn't find item")
 }
 
 #[cfg(test)]
@@ -68,7 +61,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(AoCResult::Ofu32(653), find_solution().unwrap());
+        assert_eq!(653, find_solution())
     }
 
     #[test]

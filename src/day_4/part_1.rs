@@ -1,5 +1,3 @@
-use crate::{shared::AoCResult, utils::read_file};
-
 #[derive(Default, Debug)]
 struct Passport {
     byr: Option<String>,
@@ -71,15 +69,15 @@ fn parse_lines_into_passports(lines: &[String]) -> Vec<Passport> {
 }
 
 // https://adventofcode.com/2020/day/4
-pub fn find_solution() -> Result<AoCResult, Box<dyn std::error::Error>> {
-    let split = read_file("./src/day_4/input.txt".into())?;
+pub fn find_solution() -> u32 {
+    let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
 
-    let valid_passports = parse_lines_into_passports(&split)
+    let valid_passports = parse_lines_into_passports(&lines)
         .into_iter()
         .filter(Passport::is_valid)
         .count();
 
-    Ok(AoCResult::Ofu32(valid_passports as u32))
+    valid_passports as u32
 }
 
 #[cfg(test)]
@@ -88,6 +86,6 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(AoCResult::Ofu32(200), find_solution().unwrap());
+        assert_eq!(200, find_solution())
     }
 }

@@ -1,8 +1,5 @@
 use std::collections::HashMap;
 
-use crate::shared::{AoCError, AoCResult};
-use crate::utils::read_file;
-
 fn find_sum_of_2_is_2020(fixed: u32, rest: Vec<u32>) -> Option<(u32, u32)> {
     let mut missing_to_value: HashMap<i32, i32> = HashMap::new();
 
@@ -20,7 +17,7 @@ fn find_sum_of_2_is_2020(fixed: u32, rest: Vec<u32>) -> Option<(u32, u32)> {
     None
 }
 
-fn find_sum_of_3_is_2020(numbers: &[u32]) -> Option<(u32, u32, u32)> {
+fn find_sum_of_3_is_2020(numbers: &[u32]) -> (u32, u32, u32) {
     for n in numbers {
         let mut vec_without_n = numbers.to_owned();
         vec_without_n.retain(|r| *r != *n);
@@ -28,28 +25,26 @@ fn find_sum_of_3_is_2020(numbers: &[u32]) -> Option<(u32, u32, u32)> {
         match find_sum_of_2_is_2020(*n, vec_without_n) {
             None => (),
             Some((part2, part3)) => {
-                return Some((*n, part2, part3));
+                return (*n, part2, part3);
             }
         }
     }
 
-    None
+    panic!("No sum of 2020 found")
 }
 
 // https://adventofcode.com/2020/day/1
-pub fn find_solution() -> Result<AoCResult, Box<dyn std::error::Error>> {
-    let split = read_file("./src/day_1/input.txt".into())?;
+pub fn find_solution() -> u32 {
+    let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
 
-    let numbers: Vec<u32> = split
+    let numbers: Vec<u32> = lines
         .into_iter()
         .map(|s| s.parse::<u32>().unwrap())
         .collect();
 
-    let (entry1, entry2, entry3) = find_sum_of_3_is_2020(&numbers).ok_or(AoCError {
-        message: "Didn't find a sum of x + y + z = 2020".to_string(),
-    })?;
+    let (entry1, entry2, entry3) = find_sum_of_3_is_2020(&numbers);
 
-    Ok(AoCResult::Ofu32(entry1 * entry2 * entry3))
+    entry1 * entry2 * entry3
 }
 #[cfg(test)]
 mod tests {
@@ -58,6 +53,6 @@ mod tests {
     #[test]
 
     fn outcome() {
-        assert_eq!(AoCResult::Ofu32(100_655_544), find_solution().unwrap());
+        assert_eq!(100_655_544, find_solution());
     }
 }

@@ -1,7 +1,5 @@
 use std::collections::HashMap;
 
-use crate::{shared::AoCResult, utils::read_file};
-
 struct RuleWithPassword {
     min: u32,
     max: u32,
@@ -48,16 +46,16 @@ fn parse_line(line: &str) -> RuleWithPassword {
 }
 
 // https://adventofcode.com/2020/day/2
-pub fn find_solution() -> Result<AoCResult, Box<dyn std::error::Error>> {
-    let split = read_file("./src/day_2/input.txt".into())?;
+pub fn find_solution() -> u32 {
+    let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
 
-    let valid_passwords = split
+    let valid_passwords = lines
         .into_iter()
         .map(|s| parse_line(&s))
         .filter(RuleWithPassword::is_valid)
         .count();
 
-    Ok(AoCResult::Ofu32(valid_passwords as u32))
+    valid_passwords as u32
 }
 
 #[cfg(test)]
@@ -67,6 +65,6 @@ mod tests {
     #[test]
 
     fn outcome() {
-        assert_eq!(AoCResult::Ofu32(620), find_solution().unwrap());
+        assert_eq!(620, find_solution())
     }
 }

@@ -1,5 +1,3 @@
-use crate::{shared::AoCResult, utils::read_file};
-
 fn descent_and_go_right(lines: &[String], row: usize, col: usize, mut trees: u32) -> u32 {
     match lines.get(row) {
         Some(line) => {
@@ -14,12 +12,12 @@ fn descent_and_go_right(lines: &[String], row: usize, col: usize, mut trees: u32
 }
 
 // https://adventofcode.com/2020/day/3
-pub fn find_solution() -> Result<AoCResult, Box<dyn std::error::Error>> {
-    let split = read_file("./src/day_3/input.txt".into())?;
+pub fn find_solution() -> u32 {
+    let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
 
-    let result = descent_and_go_right(&split, 0, 0, 0);
+    let result = descent_and_go_right(&lines, 0, 0, 0);
 
-    Ok(AoCResult::Ofu32(result))
+    result
 }
 
 #[cfg(test)]
@@ -28,6 +26,6 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(AoCResult::Ofu32(191), find_solution().unwrap());
+        assert_eq!(191, find_solution())
     }
 }
