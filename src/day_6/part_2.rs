@@ -60,7 +60,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(3305, find_solution())
+        assert_eq!(3305, find_solution());
     }
 
     #[test]

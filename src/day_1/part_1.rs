@@ -19,12 +19,9 @@ fn find_sum_of_2_is_2020(numbers: &[u32]) -> (u32, u32) {
 
 // https://adventofcode.com/2020/day/1
 pub fn find_solution() -> u32 {
-    let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+    let lines = include_str!("input.txt");
 
-    let numbers: Vec<u32> = lines
-        .into_iter()
-        .map(|s| s.parse::<u32>().unwrap())
-        .collect();
+    let numbers: Vec<u32> = lines.lines().map(|s| s.parse::<u32>().unwrap()).collect();
 
     let (entry1, entry2) = find_sum_of_2_is_2020(&numbers);
 

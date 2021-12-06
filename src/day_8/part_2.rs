@@ -96,7 +96,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(920, find_solution())
+        assert_eq!(920, find_solution());
     }
 
     #[test]

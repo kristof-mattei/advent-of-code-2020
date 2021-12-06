@@ -15,9 +15,7 @@ fn descent_and_go_right(lines: &[String], row: usize, col: usize, mut trees: u32
 pub fn find_solution() -> u32 {
     let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
 
-    let result = descent_and_go_right(&lines, 0, 0, 0);
-
-    result
+    descent_and_go_right(&lines, 0, 0, 0)
 }
 
 #[cfg(test)]
@@ -26,6 +24,6 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(191, find_solution())
+        assert_eq!(191, find_solution());
     }
 }

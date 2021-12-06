@@ -69,9 +69,7 @@ pub fn find_solution() -> i32 {
 
     let operations = parse_lines(&lines);
 
-    let accumulator = execute_until_same_line_reached(&operations);
-
-    accumulator
+    execute_until_same_line_reached(&operations)
 }
 
 #[cfg(test)]
@@ -80,7 +78,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(1584, find_solution())
+        assert_eq!(1584, find_solution());
     }
 
     #[test]

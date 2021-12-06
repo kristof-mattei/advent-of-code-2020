@@ -47,11 +47,11 @@ fn parse_line(line: &str) -> RuleWithPassword {
 
 // https://adventofcode.com/2020/day/2
 pub fn find_solution() -> u32 {
-    let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+    let lines = include_str!("input.txt");
 
     let valid_passwords = lines
-        .into_iter()
-        .map(|s| parse_line(&s))
+        .lines()
+        .map(parse_line)
         .filter(RuleWithPassword::is_valid)
         .count();
 
@@ -65,6 +65,6 @@ mod tests {
     #[test]
 
     fn outcome() {
-        assert_eq!(620, find_solution())
+        assert_eq!(620, find_solution());
     }
 }
