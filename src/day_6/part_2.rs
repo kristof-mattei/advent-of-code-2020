@@ -1,7 +1,5 @@
 use std::collections::HashMap;
 
-use crate::utils::read_file;
-
 fn count_of_questions_answered_by_everybody(group: &[String]) -> u32 {
     let mut count_of_answers: HashMap<char, u32> = HashMap::new();
 
@@ -46,14 +44,14 @@ fn parse_lines_into_questionaires(lines: &[String]) -> Vec<u32> {
 }
 
 // https://adventofcode.com/2020/day/6
-pub fn find_solution() -> Result<u32, Box<dyn std::error::Error>> {
-    let split = read_file("./src/day_6/input.txt".into())?;
+pub fn find_solution() -> u32 {
+    let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
 
-    let answers: u32 = parse_lines_into_questionaires(&split)
+    let answers: u32 = parse_lines_into_questionaires(&lines)
         .into_iter()
         .sum::<u32>();
 
-    Ok(answers)
+    answers
 }
 
 #[cfg(test)]
@@ -62,7 +60,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(3305, find_solution().unwrap());
+        assert_eq!(3305, find_solution());
     }
 
     #[test]

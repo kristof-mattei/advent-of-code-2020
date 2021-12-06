@@ -1,5 +1,3 @@
-use crate::utils::read_file;
-
 struct RuleWithPassword {
     first_position: usize,
     second_position: usize,
@@ -38,16 +36,16 @@ fn parse_line(line: &str) -> RuleWithPassword {
 }
 
 // https://adventofcode.com/2020/day/2
-pub fn find_solution() -> Result<u32, Box<dyn std::error::Error>> {
-    let split = read_file("./src/day_2/input.txt".into())?;
+pub fn find_solution() -> u32 {
+    let lines = include_str!("input.txt");
 
-    let valid_passwords = split
-        .into_iter()
-        .map(|s| parse_line(&s))
+    let valid_passwords = lines
+        .lines()
+        .map(parse_line)
         .filter(RuleWithPassword::is_valid)
         .count();
 
-    Ok(valid_passwords as u32)
+    valid_passwords as u32
 }
 
 #[cfg(test)]
@@ -56,6 +54,6 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(727, find_solution().unwrap());
+        assert_eq!(727, find_solution());
     }
 }

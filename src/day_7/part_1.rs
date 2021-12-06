@@ -1,5 +1,5 @@
-use crate::utils::read_file;
-use std::{cell::RefCell, collections::HashMap, fmt, rc::Rc};
+use core::fmt;
+use std::{cell::RefCell, collections::HashMap, rc::Rc};
 
 #[derive(Default, Debug)]
 pub struct Bag {
@@ -134,13 +134,13 @@ fn count_parents(bag_parsed: &HashMap<String, Rc<Bag>>, start: &str) -> u32 {
 }
 
 // https://adventofcode.com/2020/day/7
-pub fn find_solution() -> Result<u32, Box<dyn std::error::Error>> {
+pub fn find_solution() -> u32 {
     const BAG_NAME: &str = "shiny gold";
-    let split = read_file("./src/day_7/input.txt".into())?;
+    let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
 
-    let bags = parse_bags(&split);
+    let bags = parse_bags(&lines);
 
-    Ok(count_parents(&bags, BAG_NAME))
+    count_parents(&bags, BAG_NAME)
 }
 
 #[cfg(test)]
@@ -149,7 +149,7 @@ mod tests {
 
     #[test]
     fn outcome() {
-        assert_eq!(272, find_solution().unwrap());
+        assert_eq!(272, find_solution());
     }
 
     #[test]
