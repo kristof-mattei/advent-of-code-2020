@@ -4,6 +4,13 @@
 #![allow(clippy::cast_possible_truncation)]
 #![allow(clippy::cast_possible_wrap)]
 #![allow(clippy::cast_sign_loss)]
+#![allow(clippy::too_many_lines)]
+#![allow(clippy::let_and_return)]
+
+use shared::Day;
+
+mod shared;
+mod utils;
 
 mod day_1;
 mod day_10;
@@ -15,42 +22,30 @@ mod day_6;
 mod day_7;
 mod day_8;
 mod day_9;
-mod shared;
-mod utils;
 
 fn print_answer(day: u32, part: u32, result: &str) {
     println!("Answer to Day {}, part {} is ... {}", day, part, result);
 }
 
 fn main() {
-    let solutions = vec![
-        day_1::part_1::find_solution().map(|r| r.to_string()),
-        day_1::part_2::find_solution().map(|r| r.to_string()),
-        day_2::part_1::find_solution().map(|r| r.to_string()),
-        day_2::part_2::find_solution().map(|r| r.to_string()),
-        day_3::part_1::find_solution().map(|r| r.to_string()),
-        day_3::part_2::find_solution().map(|r| r.to_string()),
-        day_4::part_1::find_solution().map(|r| r.to_string()),
-        day_4::part_2::find_solution().map(|r| r.to_string()),
-        day_5::part_1::find_solution().map(|r| r.to_string()),
-        day_5::part_2::find_solution().map(|r| r.to_string()),
-        day_6::part_1::find_solution().map(|r| r.to_string()),
-        day_6::part_2::find_solution().map(|r| r.to_string()),
-        day_7::part_1::find_solution().map(|r| r.to_string()),
-        day_7::part_2::find_solution().map(|r| r.to_string()),
-        day_8::part_1::find_solution().map(|r| r.to_string()),
-        day_8::part_2::find_solution().map(|r| r.to_string()),
-        day_9::part_1::find_solution().map(|r| r.to_string()),
-        day_9::part_2::find_solution().map(|r| r.to_string()),
-        day_10::part_1::find_solution().map(|r| r.to_string()),
-        day_10::part_2::find_solution().map(|r| r.to_string()),
-    ];
-
     let mut day: u32 = 1;
 
-    for day_solution in solutions.windows(2) {
-        print_answer(day, 1, &day_solution[0]);
-        print_answer(day, 2, &day_solution[1]);
+    let solutions: Vec<Box<dyn Day>> = vec![
+        Box::new(day_1::Solution {}),
+        Box::new(day_2::Solution {}),
+        Box::new(day_3::Solution {}),
+        Box::new(day_4::Solution {}),
+        Box::new(day_5::Solution {}),
+        Box::new(day_6::Solution {}),
+        Box::new(day_7::Solution {}),
+        Box::new(day_8::Solution {}),
+        Box::new(day_9::Solution {}),
+        Box::new(day_10::Solution {}),
+    ];
+
+    for solution in solutions {
+        print_answer(day, 1, &solution.part_1().to_string());
+        print_answer(day, 2, &solution.part_2().to_string());
 
         day += 1;
     }
