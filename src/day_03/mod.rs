@@ -53,7 +53,7 @@ impl Day for Solution {
 mod tests {
     mod part_1 {
         use crate::{
-            day_3::Solution,
+            day_03::Solution,
             shared::{Day, PartSolution},
         };
 
@@ -64,7 +64,7 @@ mod tests {
     }
     mod part_2 {
         use crate::{
-            day_3::Solution,
+            day_03::Solution,
             shared::{Day, PartSolution},
         };
 

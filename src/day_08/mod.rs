@@ -138,7 +138,7 @@ mod tests {
 
     mod part_1 {
         use crate::{
-            day_8::{execute_until_same_line_reached, parse_lines, Ended, Operation, Solution},
+            day_08::{execute_until_same_line_reached, parse_lines, Ended, Operation, Solution},
             shared::{Day, PartSolution},
         };
 
@@ -240,7 +240,7 @@ mod tests {
 
     mod part_2 {
         use crate::{
-            day_8::{
+            day_08::{
                 build_new_vector, execute_until_same_line_reached, parse_lines, Ended, Solution,
             },
             shared::{Day, PartSolution},

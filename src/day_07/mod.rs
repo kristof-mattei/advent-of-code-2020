@@ -178,7 +178,7 @@ mod tests {
 
     mod part_1 {
         use crate::{
-            day_7::{count_parents, parse_bag_line, parse_bags, Solution},
+            day_07::{count_parents, parse_bag_line, parse_bags, Solution},
             shared::{Day, PartSolution},
         };
 
@@ -349,7 +349,7 @@ mod tests {
 
     mod part_2 {
         use crate::{
-            day_7::{count_bags_recursive, parse_bag_line, parse_bags, Solution},
+            day_07::{count_bags_recursive, parse_bag_line, parse_bags, Solution},
             shared::{Day, PartSolution},
         };
 

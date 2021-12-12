@@ -84,7 +84,7 @@ impl Day for Solution {
 mod tests {
     mod part_1 {
         use crate::{
-            day_6::{parse_group_of_answers, Solution},
+            day_06::{parse_group_of_answers, Solution},
             shared::{Day, PartSolution},
         };
 
@@ -136,7 +136,7 @@ mod tests {
 
     mod part_2 {
         use crate::{
-            day_6::{count_of_questions_answered_by_everybody, Solution},
+            day_06::{count_of_questions_answered_by_everybody, Solution},
             shared::{Day, PartSolution},
         };
 
