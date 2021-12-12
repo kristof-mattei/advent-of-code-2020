@@ -10,7 +10,6 @@ on:
 
 jobs:
   dump:
-    name: Dump
     runs-on: ubuntu-latest
     steps:
       - name: Debug
