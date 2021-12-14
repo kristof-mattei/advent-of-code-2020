@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/kristof-mattei/advent-of-code-2020#readme",
   "devDependencies": {
-    "@actions/tool-cache": "^1.7.1",
     "prettier": "^2.5.1"
   },
   "publishConfig": {
