@@ -1,42 +1,68 @@
-use std::collections::HashMap;
+use std::collections::HashSet;
 
 use crate::shared::{Day, PartSolution};
 
-fn find_sum_of_2_is(sum: u32, rest: &[u32]) -> Option<(u32, u32)> {
-    let mut missing_to_value: HashMap<u32, u32> = HashMap::new();
-
-    for n in rest {
-        match missing_to_value.get(n) {
-            Some(x) => {
-                println!("{:?}", missing_to_value);
-                return Some((*x, *n));
-            }
-            None => {
-                // no point in having negative values
-                if sum >= *n {
-                    missing_to_value.insert(sum - n, *n);
-                }
-            }
-        }
-    }
-
-    None
+fn k_sums_unsorted(mut nums: Vec<i32>, target: i32, k: usize) -> Vec<Vec<i32>> {
+    nums.sort_unstable();
+    k_sum(&nums, target, k)
 }
 
-fn find_sum_of_3_is_2020(numbers: &[u32]) -> (u32, u32, u32) {
-    for n in numbers {
-        let mut vec_without_n = numbers.to_owned();
-        vec_without_n.retain(|r| *r != *n);
+fn k_sum(nums: &[i32], target: i32, k: usize) -> Vec<Vec<i32>> {
+    // assert!(nums.is_sorted());
 
-        match find_sum_of_2_is(2020 - *n, &vec_without_n) {
-            None => (),
-            Some((part2, part3)) => {
-                return (*n, part2, part3);
+    let mut result = Vec::<Vec<i32>>::new();
+
+    if nums.is_empty() {
+        return result;
+    }
+
+    // ensure we can actually make a matching k with the values in
+    // our nums
+    let average_value = target / k as i32;
+
+    // ensure average value falls between
+    if nums[0] > average_value || average_value > nums[nums.len() - 1] {
+        return result;
+    }
+
+    if k == 2 {
+        return two_sum(nums, target);
+    }
+
+    for i in 0..nums.len() {
+        // detect duplicates
+        if i == 0 || nums[i - 1] != nums[i] {
+            let subsets = k_sum(&nums[i + 1..], target - nums[i], k - 1);
+
+            for mut subset in subsets {
+                subset.push(nums[i]);
+
+                result.push(subset);
             }
         }
     }
 
-    panic!("No sum of 2020 found");
+    result
+}
+
+/// nums needs to be sorted!
+fn two_sum(nums: &[i32], target: i32) -> Vec<Vec<i32>> {
+    // assert!(nums.is_sorted());
+
+    let mut result = vec![];
+    let mut hash_set = HashSet::new();
+
+    for num in nums {
+        if result.last().map_or(true, |v: &Vec<i32>| &v[0] != num)
+            && hash_set.contains(&(target - num))
+        {
+            result.push(vec![*num, target - num]);
+        }
+
+        hash_set.insert(num);
+    }
+
+    result
 }
 
 pub struct Solution {}
@@ -45,21 +71,21 @@ impl Day for Solution {
     fn part_1(&self) -> PartSolution {
         let lines = include_str!("input.txt");
 
-        let numbers: Vec<u32> = lines.lines().map(|s| s.parse::<u32>().unwrap()).collect();
+        let numbers = lines.lines().map(|s| s.parse::<i32>().unwrap()).collect();
 
-        let (entry1, entry2) = find_sum_of_2_is(2020, &numbers).unwrap();
+        let results = k_sums_unsorted(numbers, 2020, 2);
 
-        PartSolution::U32(entry1 * entry2)
+        PartSolution::I32(results[0][0] * results[0][1])
     }
 
     fn part_2(&self) -> PartSolution {
         let lines = include_str!("input.txt");
 
-        let numbers: Vec<u32> = lines.lines().map(|s| s.parse::<u32>().unwrap()).collect();
+        let numbers = lines.lines().map(|s| s.parse::<i32>().unwrap()).collect();
 
-        let (entry1, entry2, entry3) = find_sum_of_3_is_2020(&numbers);
+        let results = k_sums_unsorted(numbers, 2020, 3);
 
-        PartSolution::U32(entry1 * entry2 * entry3)
+        PartSolution::I32(results[0][0] * results[0][1] * results[0][2])
     }
 }
 
@@ -67,25 +93,49 @@ impl Day for Solution {
 mod tests {
     mod part_1 {
         use crate::{
-            day_01::Solution,
+            day_01::{k_sums_unsorted, Solution},
             shared::{Day, PartSolution},
         };
 
         #[test]
+        fn example() {
+            let input = vec![1721, 979, 366, 299, 675, 1456];
+
+            let results = k_sums_unsorted(input, 2020, 2);
+
+            assert_eq!(results.len(), 1);
+            assert_eq!(results.get(0).map_or(0, Vec::len), 2);
+
+            assert_eq!(results[0][0] * results[0][1], 514_579);
+        }
+
+        #[test]
         fn outcome() {
-            assert_eq!(PartSolution::U32(1_019_571), (Solution {}).part_1());
+            assert_eq!(PartSolution::I32(1_019_571), (Solution {}).part_1());
         }
     }
 
     mod part_2 {
         use crate::{
-            day_01::Solution,
+            day_01::{k_sums_unsorted, Solution},
             shared::{Day, PartSolution},
         };
 
         #[test]
+        fn example() {
+            let input = vec![1721, 979, 366, 299, 675, 1456];
+
+            let results = k_sums_unsorted(input, 2020, 3);
+
+            assert_eq!(results.len(), 1);
+            assert_eq!(results.get(0).map_or(0, Vec::len), 3);
+
+            assert_eq!(results[0][0] * results[0][1] * results[0][2], 241_861_950);
+        }
+
+        #[test]
         fn outcome() {
-            assert_eq!(PartSolution::U32(100_655_544), (Solution {}).part_2());
+            assert_eq!(PartSolution::I32(100_655_544), (Solution {}).part_2());
         }
     }
 }

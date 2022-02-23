@@ -110,8 +110,8 @@ mod tests {
             day_02::Solution,
             shared::{Day, PartSolution},
         };
-        #[test]
 
+        #[test]
         fn outcome() {
             assert_eq!(PartSolution::USize(620), (Solution {}).part_1());
         }
