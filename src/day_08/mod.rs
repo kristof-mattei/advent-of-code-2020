@@ -76,7 +76,7 @@ fn execute_until_same_line_reached(operations: &[Operation]) -> Ended {
 }
 
 fn build_new_vector(operations: &[Operation], to_swap_index: usize) -> Vec<Operation> {
-    let mut copy: Vec<_> = operations.iter().copied().collect();
+    let mut copy: Vec<_> = operations.to_vec();
 
     let item_to_swap = copy.get_mut(to_swap_index).unwrap();
 
