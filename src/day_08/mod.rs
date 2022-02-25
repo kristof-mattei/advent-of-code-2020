@@ -62,13 +62,13 @@ fn execute_until_same_line_reached(operations: &[Operation]) -> Ended {
                 Operation::Acc(acc) => {
                     accumulator += acc;
                     index += 1;
-                }
+                },
                 Operation::Jmp(jmp) => {
                     index += jmp;
-                }
+                },
                 Operation::Nop(_) => {
                     index += 1;
-                }
+                },
             },
             None => return Ended::TheEnd(accumulator),
         }
@@ -76,7 +76,7 @@ fn execute_until_same_line_reached(operations: &[Operation]) -> Ended {
 }
 
 fn build_new_vector(operations: &[Operation], to_swap_index: usize) -> Vec<Operation> {
-    let mut copy: Vec<_> = operations.iter().copied().collect();
+    let mut copy: Vec<_> = operations.to_vec();
 
     let item_to_swap = copy.get_mut(to_swap_index).unwrap();
 

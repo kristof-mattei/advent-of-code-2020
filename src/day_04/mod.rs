@@ -100,7 +100,7 @@ impl Passport {
                 let valid_colors = ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"];
 
                 valid_colors.contains(&&**ecl)
-            }
+            },
             None => false,
         }
     }

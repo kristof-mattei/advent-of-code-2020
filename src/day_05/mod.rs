@@ -64,7 +64,7 @@ impl Day for Solution {
             match previous {
                 Some(p) if (i - p) > 1 => {
                     return PartSolution::U32(p + 1);
-                }
+                },
                 _ => previous = Some(i),
             }
         }
