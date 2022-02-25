@@ -62,13 +62,13 @@ fn execute_until_same_line_reached(operations: &[Operation]) -> Ended {
                 Operation::Acc(acc) => {
                     accumulator += acc;
                     index += 1;
-                }
+                },
                 Operation::Jmp(jmp) => {
                     index += jmp;
-                }
+                },
                 Operation::Nop(_) => {
                     index += 1;
-                }
+                },
             },
             None => return Ended::TheEnd(accumulator),
         }

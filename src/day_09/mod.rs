@@ -10,13 +10,13 @@ fn find_sum_of_2_is(sum: u64, rest: &[u64]) -> Result<(), String> {
             Some(_) => {
                 println!("{:?}", missing_to_value);
                 return Ok(());
-            }
+            },
             None => {
                 // no point in having negative values
                 if sum >= *n {
                     missing_to_value.insert(sum - n, *n);
                 }
-            }
+            },
         }
     }
 
@@ -63,15 +63,15 @@ fn find_contiguous_set_of_numbers_that_sum_up_to(input: &[u64], target: u64) -> 
             std::cmp::Ordering::Less => {
                 offset += 1;
                 to_take = 2;
-            }
+            },
             std::cmp::Ordering::Equal => {
                 let min = *range.iter().min().unwrap();
                 let max = *range.iter().max().unwrap();
                 return (*min, *max);
-            }
+            },
             std::cmp::Ordering::Greater => {
                 to_take += 1;
-            }
+            },
         }
     }
 }
