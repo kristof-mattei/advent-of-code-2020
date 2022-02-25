@@ -1,9 +1,11 @@
 code:
   - "src/**"
   - "TAG"
+  - Cargo.lock
   - "*.toml"
   - Dockerfile
   - "tests/**"
   - ".github/**"
   - "package.json"
   - "package-lock.json"
+  - ".codeclimate.yml"
