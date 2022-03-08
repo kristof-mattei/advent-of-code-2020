@@ -22,7 +22,7 @@ fn descent_and_go_right(
                 down,
                 right,
             )
-        }
+        },
         None => trees,
     }
 }
