@@ -54,7 +54,7 @@ fn parse_line(line: &str) -> (usize, usize, char, String) {
     let password = pieces[2];
 
     (
-        *min_max_vec.get(0).unwrap(),
+        *min_max_vec.first().unwrap(),
         *min_max_vec.get(1).unwrap(),
         char_with_colon_piece.chars().next().unwrap(),
         password.into(),

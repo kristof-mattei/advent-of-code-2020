@@ -2,7 +2,7 @@ use crate::shared::{Day, PartSolution};
 
 use std::collections::HashSet;
 
-#[derive(PartialEq, Debug, Clone, Copy)]
+#[derive(PartialEq, Eq, Debug, Clone, Copy)]
 pub enum Operation {
     Acc(i32),
     Jmp(i32),

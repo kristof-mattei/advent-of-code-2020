@@ -50,7 +50,7 @@ pub fn parse_bag_line(bag_line: &str) -> (String, Vec<(u32, String)>) {
 
     let split: Vec<&str> = cleaned_up.split("contain").into_iter().collect();
 
-    let bag_name = split.get(0).unwrap().trim();
+    let bag_name = split.first().unwrap().trim();
 
     let inside_bags = split.get(1).unwrap().trim();
 
