@@ -5,7 +5,8 @@ git fetch upstream
 
 git branch -D update-from-upstream
 git branch update-from-upstream origin/main
+
 git checkout update-from-upstream
-git branch -u origin/update-from-upstream
+git push --set-upstream origin update-from-upstream
 
 git merge upstream/main
