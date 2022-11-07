@@ -56,7 +56,7 @@ fn is_valid_height(
     maximum_inclusive: u32,
 ) -> bool {
     if height_as_string.ends_with(suffix) {
-        matches!(height_as_string[0..(height_as_string.len() - suffix.len())].parse::<u32>(), Ok(height) if height >= minimum_inclusive && height <= maximum_inclusive)
+        matches!( height_as_string[0..(height_as_string.len() - suffix.len())].parse::<u32>(), Ok(height) if (height >= minimum_inclusive && height <= maximum_inclusive))
     } else {
         false
     }

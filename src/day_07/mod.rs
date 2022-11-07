@@ -16,20 +16,23 @@ impl fmt::Display for Bag {
             .children
             .borrow()
             .iter()
-            .map(|(c, b)| format!("Name: {}, count: {}", b.name, c))
+            .map(|(count, bag)| {
+                let name = &bag.name;
+                format!("Name: {name}, count: {count}")
+            })
             .collect();
 
         let parent_names: Vec<String> = self
             .parents
             .borrow()
             .iter()
-            .map(|b| format!("Name: {}", b.name))
+            .map(|bag| format!("Name: {}", &bag.name))
             .collect();
 
         write!(
             f,
-            "Name: {}, parents: {:?}, children: {:?} ",
-            self.name, parent_names, child_names
+            "Name: {}, parents: {parent_names:?}, children: {child_names:?} ",
+            self.name
         )
     }
 }
@@ -144,7 +147,7 @@ fn count_bags_recursive(bag: &Rc<Bag>) -> u32 {
         .iter()
         .map(|(c, b)| {
             let sum_of_children = count_bags_recursive(b);
-            println!("Child {}*{} has {} children", c, b.name, sum_of_children);
+            println!("Child {c}*{} has {sum_of_children} children", b.name);
 
             c + c * sum_of_children
         })

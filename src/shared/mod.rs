@@ -20,6 +20,6 @@ impl std::fmt::Display for PartSolution {
             PartSolution::USize(x) => x.to_string(),
         };
 
-        write!(f, "{}", string)
+        write!(f, "{string}")
     }
 }
