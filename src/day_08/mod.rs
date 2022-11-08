@@ -1,6 +1,6 @@
-use crate::shared::{Day, PartSolution};
-
 use std::collections::HashSet;
+
+use crate::shared::{Day, PartSolution};
 
 #[derive(PartialEq, Eq, Debug, Clone, Copy)]
 pub enum Operation {
@@ -214,9 +214,9 @@ mod tests {
             let length = items.len() as i32;
 
             for i in -10..=length {
-                let index = (i as i32).wrapping_rem_euclid(length);
+                let index = i.wrapping_rem_euclid(length);
 
-                println!("{} ({}): {}", i, index, items[index as usize]);
+                println!("{i} ({index}): {}", items[index as usize]);
             }
         }
 
@@ -265,7 +265,7 @@ mod tests {
 
             let new_vector = build_new_vector(&operations, 7);
 
-            println!("{:#?}", new_vector);
+            println!("{new_vector:#?}");
 
             let acc = execute_until_same_line_reached(&new_vector);
 
@@ -284,9 +284,9 @@ mod tests {
                 .take(vec1.len() - SPLIT_AT - 1)
                 .collect();
 
-            println!("{:?}", vec1);
-            println!("{:?}", vec2);
-            println!("{:?}", vec3);
+            println!("{vec1:?}");
+            println!("{vec2:?}");
+            println!("{vec3:?}");
         }
     }
 }
