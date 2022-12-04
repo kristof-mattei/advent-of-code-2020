@@ -1,115 +1,33 @@
-use std::{collections::HashSet, fmt::Display};
+use std::fmt::Display;
 
 use crate::shared::{Day, PartSolution};
 
-fn get_neighbors(
-    board: &[Vec<Thing>],
-    row_index: usize,
-    column_index: usize,
-) -> HashSet<(usize, usize)> {
-    let mut neighbors = HashSet::new();
+use self::{part_1::flip_board_part_1, part_2::flip_board_part_2};
 
-    let rows = board.len();
-    let columns = board.get(0).map(Vec::len).unwrap_or_default();
+mod part_1;
+mod part_2;
 
-    // clockwise:
-    // left up
-    // up
-    // right up
-    // right
-    // right down
-    // bottom
-    // left down
-    // left
-
-    let can_go_left = column_index > 0;
-    let can_go_up = row_index > 0;
-
-    let can_go_right = column_index + 1 < columns;
-    let can_go_down = row_index + 1 < rows;
-
-    // left up
-    if can_go_left && can_go_up {
-        neighbors.insert((row_index - 1, column_index - 1));
-    }
-
-    // up
-    if can_go_up {
-        neighbors.insert((row_index - 1, column_index));
-    }
-
-    // right up
-    if can_go_up && can_go_right {
-        neighbors.insert((row_index - 1, column_index + 1));
-    }
-
-    // right
-    if can_go_right {
-        neighbors.insert((row_index, column_index + 1));
-    }
-
-    // right down
-    if can_go_down && can_go_right {
-        neighbors.insert((row_index + 1, column_index + 1));
-    }
-
-    // down
-    if can_go_down {
-        neighbors.insert((row_index + 1, column_index));
-    }
-
-    // left down
-    if can_go_down && can_go_left {
-        neighbors.insert((row_index + 1, column_index - 1));
-    }
-
-    // left
-    if can_go_left {
-        neighbors.insert((row_index, column_index - 1));
-    }
-
-    neighbors
+#[derive(PartialEq, Eq)]
+struct Board {
+    number_of_rows: usize,
+    number_of_cols: usize,
+    v_now: Vec<Vec<Thing>>,
+    v_next: Vec<Vec<Thing>>,
 }
 
-fn get_seat_next_state(board: &[Vec<Thing>], row_index: usize, col_index: usize) -> Thing {
-    match board.get(row_index).and_then(|row| row.get(col_index)) {
-        Some(Thing::Floor) => Thing::Floor,
-        Some(Thing::EmptySeat) => {
-            // empty seat with no occupied seats becomes occupied
-            // meaning if at least one of the seats is occupied we remain empty
-            for (n_row_index, n_col_index) in get_neighbors(board, row_index, col_index) {
-                if board[n_row_index][n_col_index] == Thing::OccupiedSeat {
-                    return Thing::EmptySeat;
-                }
-            }
-
-            Thing::OccupiedSeat
-        },
-        Some(Thing::OccupiedSeat) => {
-            // occupied seat with >=4 neighbors occupied becomes empty
-
-            let mut occupied = 0;
-
-            for (n_row_index, n_col_index) in get_neighbors(board, row_index, col_index) {
-                if board[n_row_index][n_col_index] == Thing::OccupiedSeat {
-                    occupied += 1;
-                }
-
-                if occupied >= 4 {
-                    return Thing::EmptySeat;
-                }
-            }
-
-            Thing::OccupiedSeat
-        },
-        None => {
-            panic!("Whut?")
-        },
+impl Board {
+    fn new(cells: Vec<Vec<Thing>>) -> Self {
+        Self {
+            number_of_rows: cells.len(),
+            number_of_cols: cells.get(0).map(Vec::len).unwrap_or_default(),
+            v_now: cells.clone(),
+            v_next: cells,
+        }
     }
 }
 
-fn parse_lines(lines: &[&str]) -> Vec<Vec<Thing>> {
-    let mut board = Vec::new();
+fn parse_lines(lines: &[&str]) -> Board {
+    let mut cells = Vec::new();
     for line in lines {
         let mut row = Vec::new();
 
@@ -117,10 +35,10 @@ fn parse_lines(lines: &[&str]) -> Vec<Vec<Thing>> {
             row.push(char.into());
         }
 
-        board.push(row);
+        cells.push(row);
     }
 
-    board
+    Board::new(cells)
 }
 
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -160,49 +78,24 @@ impl From<char> for Thing {
     }
 }
 
-fn flip_board(board: &[Vec<Thing>]) -> Vec<Vec<Thing>> {
-    let mut new_board = vec![vec![Thing::Floor; board[0].len()]; board.len()];
-
-    for row_index in 0..board.len() {
-        for col_index in 0..board[row_index].len() {
-            new_board[row_index][col_index] = get_seat_next_state(board, row_index, col_index);
-        }
-    }
-
-    new_board
-}
-
-fn flip_board_until_stable(mut board: Vec<Vec<Thing>>) -> usize {
-    let mut stable = false;
-    while !stable {
-        let new_board = flip_board(&board);
-
-        if new_board == board {
-            stable = true;
-        }
-
-        board = new_board;
-    }
-
+fn count_occupied(board: &Board) -> usize {
     return board
+        .v_now
         .iter()
         .map(|row| row.iter().filter(|&&v| v == Thing::OccupiedSeat).count())
         .sum();
 }
 
-fn pretty_print(board: &[Vec<Thing>]) -> String {
-    let mut lines = Vec::new();
-    for row in board {
-        let mut line = Vec::<char>::new();
+fn flip_board_until_stable_part_1(mut board: Board) -> usize {
+    while flip_board_part_1(&mut board) {}
 
-        for value in row {
-            line.push((*value).into());
-        }
+    count_occupied(&board)
+}
 
-        lines.push(line.iter().collect::<String>());
-    }
+fn flip_board_until_stable_part_2(mut board: Board) -> usize {
+    while flip_board_part_2(&mut board) {}
 
-    lines.join("\n")
+    count_occupied(&board)
 }
 pub struct Solution {}
 
@@ -212,18 +105,26 @@ impl Day for Solution {
 
         let board = parse_lines(&lines);
 
-        let answer = flip_board_until_stable(board);
+        let answer = flip_board_until_stable_part_1(board);
 
         PartSolution::USize(answer)
     }
 
     fn part_2(&self) -> PartSolution {
-        unimplemented!()
+        let lines: Vec<&str> = include_str!("input.txt").lines().collect();
+
+        let board = parse_lines(&lines);
+
+        let answer = flip_board_until_stable_part_2(board);
+
+        PartSolution::USize(answer)
     }
 }
 
 #[cfg(test)]
 mod test {
+    use super::Board;
+
     fn get_example() -> Vec<&'static str> {
         include_str!("example.txt")
             .lines()
@@ -231,27 +132,44 @@ mod test {
             .collect()
     }
 
+    fn pretty_print(board: &Board) -> String {
+        let mut lines = Vec::new();
+        for row in &board.v_now {
+            let mut line = Vec::<char>::new();
+
+            for value in row {
+                line.push((*value).into());
+            }
+
+            lines.push(line.iter().collect::<String>());
+        }
+
+        lines.join("\n")
+    }
+
     mod part_1 {
-        use super::super::*;
         use crate::{
-            day_11::test::get_example,
+            day_11::part_1::flip_board_part_1,
+            day_11::{
+                parse_lines,
+                test::{get_example, pretty_print},
+                Solution,
+            },
             shared::{Day, PartSolution},
         };
 
         #[test]
         fn outcome() {
-            assert_eq!(PartSolution::U32(12855), (Solution {}).part_1());
+            assert_eq!(PartSolution::USize(2406), (Solution {}).part_1());
         }
 
         #[test]
         fn example() {
             let lines = get_example();
 
-            let board = parse_lines(&lines);
+            let mut board = parse_lines(&lines);
 
-            let new_board = flip_board(&board);
-
-            println!("{}", pretty_print(&new_board));
+            flip_board_part_1(&mut board);
 
             let expected = vec![
                 "#.##.##.##",
@@ -267,26 +185,92 @@ mod test {
             ]
             .join("\n");
 
-            assert_eq!(expected, pretty_print(&new_board));
+            assert_eq!(expected, pretty_print(&board));
 
-            // let score = calculate_score_part_1(rounds);
+            flip_board_part_1(&mut board);
 
-            // assert_eq!(score, 15);
+            let expected = vec![
+                "#.LL.L#.##",
+                "#LLLLLL.L#",
+                "L.L.L..L..",
+                "#LLL.LL.L#",
+                "#.LL.LL.LL",
+                "#.LLLL#.##",
+                "..L.L.....",
+                "#LLLLLLLL#",
+                "#.LLLLLL.L",
+                "#.#LLLL.##",
+            ]
+            .join("\n");
+
+            assert_eq!(expected, pretty_print(&board));
         }
     }
 
     mod part_2 {
         use crate::{
-            day_02::Solution,
+            day_11::part_2::flip_board_part_2,
+            day_11::{
+                parse_lines,
+                test::{get_example, pretty_print},
+                Solution,
+            },
             shared::{Day, PartSolution},
         };
 
         #[test]
         fn outcome() {
-            assert_eq!(PartSolution::U32(13726), (Solution {}).part_2());
+            assert_eq!(PartSolution::USize(2149), (Solution {}).part_2());
         }
 
         #[test]
-        fn example() {}
+        fn example() {
+            let lines = get_example();
+
+            let mut board = parse_lines(&lines);
+
+            flip_board_part_2(&mut board);
+
+            println!("{}", pretty_print(&board));
+
+            let expected = vec![
+                "#.##.##.##",
+                "#######.##",
+                "#.#.#..#..",
+                "####.##.##",
+                "#.##.##.##",
+                "#.#####.##",
+                "..#.#.....",
+                "##########",
+                "#.######.#",
+                "#.#####.##",
+            ]
+            .join("\n");
+
+            assert_eq!(expected, pretty_print(&board));
+
+            flip_board_part_2(&mut board);
+
+            println!("{}", pretty_print(&board));
+            // If a seat is empty (L) and there are no occupied seats adjacent to it, the seat becomes occupied.
+            // If a seat is occupied (#) and five or more seats adjacent to it are also occupied, the seat becomes empty.
+            // Otherwise, the seat's state does not change.
+
+            let expected = vec![
+                "#.LL.LL.L#",
+                "#LLLLLL.LL",
+                "L.L.L..L..",
+                "LLLL.LL.LL",
+                "L.LL.LL.LL",
+                "L.LLLLL.LL",
+                "..L.L.....",
+                "LLLLLLLLL#",
+                "#.LLLLLL.L",
+                "#.LLLLL.L#",
+            ]
+            .join("\n");
+
+            assert_eq!(expected, pretty_print(&board));
+        }
     }
 }
