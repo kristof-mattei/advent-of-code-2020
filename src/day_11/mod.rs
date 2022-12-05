@@ -1,8 +1,7 @@
 use std::fmt::Display;
 
-use crate::shared::{Day, PartSolution};
-
 use self::{part_1::flip_board_part_1, part_2::flip_board_part_2};
+use crate::shared::{Day, PartSolution};
 
 mod part_1;
 mod part_2;
