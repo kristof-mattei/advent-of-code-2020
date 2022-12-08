@@ -230,8 +230,6 @@ mod test {
 
             flip_board_part_2(&mut board);
 
-            println!("{}", pretty_print(&board));
-
             let expected = vec![
                 "#.##.##.##",
                 "#######.##",
@@ -250,7 +248,6 @@ mod test {
 
             flip_board_part_2(&mut board);
 
-            println!("{}", pretty_print(&board));
             // If a seat is empty (L) and there are no occupied seats adjacent to it, the seat becomes occupied.
             // If a seat is occupied (#) and five or more seats adjacent to it are also occupied, the seat becomes empty.
             // Otherwise, the seat's state does not change.

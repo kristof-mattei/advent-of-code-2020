@@ -265,8 +265,6 @@ mod tests {
 
             let new_vector = build_new_vector(&operations, 7);
 
-            println!("{new_vector:#?}");
-
             let acc = execute_until_same_line_reached(&new_vector);
 
             assert_eq!(Ended::TheEnd(8), acc);

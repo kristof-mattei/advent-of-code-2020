@@ -53,13 +53,6 @@ fn calculate_step_up_differences(mut input: Vec<u32>) -> (u32, u32, u32) {
     loop {
         match input.pop() {
             Some(next) => {
-                println!(
-                    "Previous: {}, next: {}, diff: {}",
-                    previous,
-                    next,
-                    (next - previous)
-                );
-
                 match next - previous {
                     1 => stepup_1 += 1,
                     2 => stepup_2 += 1,
