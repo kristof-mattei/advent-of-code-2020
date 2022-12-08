@@ -141,13 +141,10 @@ fn count_parents(bag_parsed: &HashMap<String, Rc<Bag>>, start: &str) -> u32 {
 fn count_bags_recursive(bag: &Rc<Bag>) -> u32 {
     let children = bag.children.borrow();
 
-    println!("Bag {}", &bag.name);
-
     children
         .iter()
         .map(|(c, b)| {
             let sum_of_children = count_bags_recursive(b);
-            println!("Child {c}*{} has {sum_of_children} children", b.name);
 
             c + c * sum_of_children
         })

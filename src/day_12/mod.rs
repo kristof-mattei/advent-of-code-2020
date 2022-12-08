@@ -95,8 +95,6 @@ impl Ship {
     }
 
     fn process_operation(&mut self, operation: &Operation) {
-        println!("Moving {operation}");
-
         match operation {
             Operation::MoveNorth(v) => {
                 self.location_y -= v;
@@ -119,18 +117,6 @@ impl Ship {
                 Direction::West => self.process_operation(&Operation::MoveWest(*v)),
             },
         }
-
-        println!(
-            "Ship's at {} {} {} {}",
-            self.location_y.abs(),
-            if self.location_y < 0 {
-                "North"
-            } else {
-                "South"
-            },
-            self.location_x.abs(),
-            if self.location_x > 0 { "East" } else { "West" },
-        );
     }
 }
 
@@ -152,8 +138,6 @@ impl ShipAndWaypoint {
     }
 
     fn process_operation_part_2(&mut self, operation: &Operation) {
-        println!("Moving {operation}");
-
         match operation {
             Operation::MoveNorth(v) => {
                 self.waypoint_location_y -= v;
@@ -204,38 +188,6 @@ impl ShipAndWaypoint {
                 self.ship_location_y += self.waypoint_location_y * *v;
             },
         }
-
-        println!(
-            "Ship is at {} {} {} {}",
-            self.ship_location_y.abs(),
-            if self.ship_location_y < 0 {
-                "North"
-            } else {
-                "South"
-            },
-            self.ship_location_x.abs(),
-            if self.ship_location_x < 0 {
-                "West"
-            } else {
-                "East"
-            },
-        );
-
-        println!(
-            "Waypoint is at {} {} {} {}",
-            self.waypoint_location_y.abs(),
-            if self.waypoint_location_y < 0 {
-                "North"
-            } else {
-                "South"
-            },
-            self.waypoint_location_x.abs(),
-            if self.waypoint_location_x < 0 {
-                "West"
-            } else {
-                "East"
-            },
-        );
     }
 }
 
