@@ -1,6 +1,6 @@
-use crate::shared::{Day, PartSolution};
-
 use std::collections::HashMap;
+
+use crate::shared::{Day, PartSolution};
 
 fn find_sum_of_2_is(sum: u64, rest: &[u64]) -> Result<(), String> {
     let mut missing_to_value: HashMap<u64, u64> = HashMap::new();
@@ -8,7 +8,6 @@ fn find_sum_of_2_is(sum: u64, rest: &[u64]) -> Result<(), String> {
     for n in rest {
         match missing_to_value.get(n) {
             Some(_) => {
-                println!("{:?}", missing_to_value);
                 return Ok(());
             },
             None => {
@@ -34,15 +33,8 @@ fn slide_until_sum_of_any_2_in_last_x_is_not_current_value(input: &[u64], last_x
         let target_sum = *input.get(offset + last_x).unwrap();
 
         if find_sum_of_2_is(target_sum, to_test).is_ok() {
-            // println!("Sum found {} in {:?}", target_sum, to_test);
-
             offset += 1;
         } else {
-            println!(
-                "Couln't find matching sum of {} in {:?}",
-                target_sum, to_test
-            );
-
             return target_sum;
         }
     }
