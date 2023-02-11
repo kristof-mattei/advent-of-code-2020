@@ -40,7 +40,7 @@ impl fmt::Display for Bag {
 pub fn map_bag_color_with_count(bag_color_with_count: &str) -> (u32, String) {
     let split = bag_color_with_count.trim().split_once(' ').unwrap();
 
-    let _test: Vec<char> = bag_color_with_count.chars().into_iter().collect();
+    let _test: Vec<char> = bag_color_with_count.chars().collect();
 
     (split.0.parse().unwrap(), split.1.to_string())
 }
@@ -51,7 +51,7 @@ pub fn parse_bag_line(bag_line: &str) -> (String, Vec<(u32, String)>) {
         .replace("bag", "")
         .replace('.', "");
 
-    let split: Vec<&str> = cleaned_up.split("contain").into_iter().collect();
+    let split: Vec<&str> = cleaned_up.split("contain").collect();
 
     let bag_name = split.first().unwrap().trim();
 

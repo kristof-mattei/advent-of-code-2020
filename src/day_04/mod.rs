@@ -20,7 +20,7 @@ fn is_valid_pid(passport_id: &str) -> bool {
 
     for _ in 0..9 {
         match passport_id_chars.next() {
-            Some(c) if ('0'..='9').contains(&c) => (),
+            Some(c) if c.is_ascii_digit() => (),
             _ => return false, // short circuit
         }
     }
@@ -41,7 +41,7 @@ fn is_valid_hcl(haircolor: &str) -> bool {
 
     for _ in 0..6 {
         match haircolor_chars.next() {
-            Some(c) if ('0'..='9').contains(&c) || ('a'..='f').contains(&c) => (),
+            Some(c) if c.is_ascii_digit() || ('a'..='f').contains(&c) => (),
             _ => return false, // short circuit
         }
     }

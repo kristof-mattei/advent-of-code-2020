@@ -19,7 +19,7 @@ fn count_of_questions_answered_by_everybody(group: &[String]) -> u32 {
     let mut count_of_answers: HashMap<char, u32> = HashMap::new();
 
     for line in group {
-        let mut duplicate_answer_per_line_check: Vec<char> = line.chars().into_iter().collect();
+        let mut duplicate_answer_per_line_check: Vec<char> = line.chars().collect();
         duplicate_answer_per_line_check.sort_unstable();
         duplicate_answer_per_line_check.dedup();
 
