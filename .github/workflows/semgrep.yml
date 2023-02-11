@@ -1,0 +1,39 @@
+name: Semgrep
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "41 3 * * 6"
+
+permissions:
+  security-events: write
+  actions: read
+  contents: read
+
+jobs:
+  semgrep:
+    name: Scan
+    runs-on: ubuntu-latest
+
+    container:
+      image: returntocorp/semgrep@sha256:a6455063aa955859336f36605c23ca6deba15e173800c5160a3f8b11cded0d2c
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+
+      - name: Run semgrep
+        shell: bash
+        env:
+          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+        run: |
+          semgrep ci --sarif --output=semgrep.sarif
+
+      - name: Upload SARIF file for GitHub Advanced Security Dashboard
+        if: always()
+        uses: github/codeql-action/upload-sarif@17573ee1cc1b9d061760f3a006fc4aac4f944fd5 # v2.2.4
+        with:
+          sarif_file: semgrep.sarif

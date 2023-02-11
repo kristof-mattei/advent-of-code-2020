@@ -7,8 +7,8 @@
     "prettier": "prettier -w \"**/*.{yml,yaml}\""
   },
   "engines": {
-    "node": ">=16.0.0",
-    "npm": ">=8.0.0"
+    "node": ">=v18.14.0",
+    "npm": ">=9.4.2"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/kristof-mattei/advent-of-code-2020#readme",
   "devDependencies": {
-    "prettier": "^2.6.0"
+    "prettier": "^2.8.4"
   },
   "publishConfig": {
     "access": "restricted"
