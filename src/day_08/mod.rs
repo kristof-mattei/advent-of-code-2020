@@ -209,7 +209,7 @@ mod tests {
 
         #[test]
         fn modulo_test() {
-            let items: Vec<char> = ('a'..='j').into_iter().collect();
+            let items: Vec<char> = ('a'..='j').collect();
 
             let length = items.len() as i32;
 
@@ -273,7 +273,7 @@ mod tests {
         #[test]
         fn pieces() {
             const SPLIT_AT: usize = 5;
-            let vec1: Vec<i32> = (0..=10).into_iter().collect();
+            let vec1: Vec<i32> = (0..=10).collect();
             let vec2: Vec<&i32> = vec1.iter().take(SPLIT_AT).collect();
 
             let vec3: Vec<&i32> = vec1
