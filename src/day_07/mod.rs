@@ -18,7 +18,7 @@ impl fmt::Display for Bag {
             .iter()
             .map(|(count, bag)| {
                 let name = &bag.name;
-                format!("Name: {name}, count: {count}")
+                format!("Name: {}, count: {}", name, count)
             })
             .collect();
 
@@ -31,8 +31,8 @@ impl fmt::Display for Bag {
 
         write!(
             f,
-            "Name: {}, parents: {parent_names:?}, children: {child_names:?} ",
-            self.name
+            "Name: {}, parents: {:?}, children: {:?} ",
+            self.name, parent_names, child_names
         )
     }
 }
