@@ -16,10 +16,7 @@ impl fmt::Display for Bag {
             .children
             .borrow()
             .iter()
-            .map(|(count, bag)| {
-                let name = &bag.name;
-                format!("Name: {}, count: {}", name, count)
-            })
+            .map(|(count, bag)| format!("Name: {}, count: {}", &bag.name, count))
             .collect();
 
         let parent_names: Vec<String> = self
