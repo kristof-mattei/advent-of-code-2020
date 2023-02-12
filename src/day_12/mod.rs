@@ -38,13 +38,13 @@ enum Operation {
 impl std::fmt::Display for Operation {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Operation::MoveNorth(v) => write!(f, "N{v}"),
-            Operation::MoveSouth(v) => write!(f, "S{v}"),
-            Operation::MoveEast(v) => write!(f, "E{v}"),
-            Operation::MoveWest(v) => write!(f, "W{v}"),
-            Operation::RotateLeft(v) => write!(f, "L{v}"),
-            Operation::RotateRight(v) => write!(f, "R{v}"),
-            Operation::MoveForward(v) => write!(f, "F{v}"),
+            Operation::MoveNorth(v) => write!(f, "N{}", v),
+            Operation::MoveSouth(v) => write!(f, "S{}", v),
+            Operation::MoveEast(v) => write!(f, "E{}", v),
+            Operation::MoveWest(v) => write!(f, "W{}", v),
+            Operation::RotateLeft(v) => write!(f, "L{}", v),
+            Operation::RotateRight(v) => write!(f, "R{}", v),
+            Operation::MoveForward(v) => write!(f, "F{}", v),
         }
     }
 }

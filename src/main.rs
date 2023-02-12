@@ -29,7 +29,7 @@ mod day_12;
 mod day_13;
 
 fn print_answer(day: u32, part: u32, result: &str) {
-    println!("Answer to Day {day}, part {part} is ... {result}");
+    println!("Answer to Day {}, part {} is ... {}", day, part, result);
 }
 
 fn main() {
