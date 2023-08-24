@@ -28,7 +28,7 @@ fn count_of_questions_answered_by_everybody(group: &[String]) -> u32 {
         for c in duplicate_answer_per_line_check {
             let count = *(count_of_answers.get(&c).unwrap_or(&0));
 
-            let _: Option<_> = count_of_answers.insert(c, count + 1);
+            let _ = count_of_answers.insert(c, count + 1);
         }
     }
 
