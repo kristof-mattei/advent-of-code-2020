@@ -170,7 +170,7 @@ mod test {
 
             flip_board_part_1(&mut board);
 
-            let expected = vec![
+            let expected = [
                 "#.##.##.##",
                 "#######.##",
                 "#.#.#..#..",
@@ -188,7 +188,7 @@ mod test {
 
             flip_board_part_1(&mut board);
 
-            let expected = vec![
+            let expected = [
                 "#.LL.L#.##",
                 "#LLLLLL.L#",
                 "L.L.L..L..",
@@ -230,7 +230,7 @@ mod test {
 
             flip_board_part_2(&mut board);
 
-            let expected = vec![
+            let expected = [
                 "#.##.##.##",
                 "#######.##",
                 "#.#.#..#..",
@@ -252,7 +252,7 @@ mod test {
             // If a seat is occupied (#) and five or more seats adjacent to it are also occupied, the seat becomes empty.
             // Otherwise, the seat's state does not change.
 
-            let expected = vec![
+            let expected = [
                 "#.LL.LL.L#",
                 "#LLLLLL.LL",
                 "L.L.L..L..",

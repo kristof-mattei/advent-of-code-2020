@@ -111,7 +111,7 @@ mod tests {
 
         #[test]
         fn test_example_1() {
-            let input: Vec<u32> = vec!["16", "10", "15", "5", "1", "11", "7", "19", "6", "12", "4"]
+            let input: Vec<u32> = ["16", "10", "15", "5", "1", "11", "7", "19", "6", "12", "4"]
                 .iter()
                 .map(|s| s.parse::<u32>().unwrap())
                 .collect();
@@ -154,7 +154,7 @@ mod tests {
 
         #[test]
         fn test_example_1() {
-            let input: Vec<u32> = vec!["16", "10", "15", "5", "1", "11", "7", "19", "6", "12", "4"]
+            let input: Vec<u32> = ["16", "10", "15", "5", "1", "11", "7", "19", "6", "12", "4"]
                 .iter()
                 .map(|s| s.parse::<u32>().unwrap())
                 .collect();

@@ -222,7 +222,7 @@ mod tests {
 
         #[test]
         fn test_example() {
-            let input: Vec<String> = vec![
+            let input: Vec<String> = [
                 "nop +0", "acc +1", "jmp +4", "acc +3", "jmp -3", "acc -99", "acc +1", "jmp -4",
                 "acc +6",
             ]
@@ -253,7 +253,7 @@ mod tests {
 
         #[test]
         fn sample_data() {
-            let input: Vec<String> = vec![
+            let input: Vec<String> = [
                 "nop +0", "acc +1", "jmp +4", "acc +3", "jmp -3", "acc -99", "acc +1", "jmp -4",
                 "acc +6",
             ]
