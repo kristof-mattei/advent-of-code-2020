@@ -104,7 +104,7 @@ mod tests {
             let results = k_sums_unsorted(input, 2020, 2);
 
             assert_eq!(results.len(), 1);
-            assert_eq!(results.get(0).map_or(0, Vec::len), 2);
+            assert_eq!(results.first().map_or(0, Vec::len), 2);
 
             assert_eq!(results[0][0] * results[0][1], 514_579);
         }
@@ -128,7 +128,7 @@ mod tests {
             let results = k_sums_unsorted(input, 2020, 3);
 
             assert_eq!(results.len(), 1);
-            assert_eq!(results.get(0).map_or(0, Vec::len), 3);
+            assert_eq!(results.first().map_or(0, Vec::len), 3);
 
             assert_eq!(results[0][0] * results[0][1] * results[0][2], 241_861_950);
         }
