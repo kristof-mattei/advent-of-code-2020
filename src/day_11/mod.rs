@@ -18,7 +18,7 @@ impl Board {
     fn new(cells: Vec<Vec<Thing>>) -> Self {
         Self {
             number_of_rows: cells.len(),
-            number_of_cols: cells.get(0).map(Vec::len).unwrap_or_default(),
+            number_of_cols: cells.first().map(Vec::len).unwrap_or_default(),
             v_now: cells.clone(),
             v_next: cells,
         }
