@@ -52,10 +52,8 @@ impl Day for Solution {
 #[cfg(test)]
 mod tests {
     mod part_1 {
-        use crate::{
-            day_03::Solution,
-            shared::{Day, PartSolution},
-        };
+        use crate::day_03::Solution;
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {
@@ -63,10 +61,8 @@ mod tests {
         }
     }
     mod part_2 {
-        use crate::{
-            day_03::Solution,
-            shared::{Day, PartSolution},
-        };
+        use crate::day_03::Solution;
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {

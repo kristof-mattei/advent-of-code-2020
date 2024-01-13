@@ -217,10 +217,8 @@ impl Day for Solution {
 #[cfg(test)]
 mod tests {
     mod part_1 {
-        use crate::{
-            day_04::Solution,
-            shared::{Day, PartSolution},
-        };
+        use crate::day_04::Solution;
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {
@@ -230,10 +228,8 @@ mod tests {
 
     #[cfg(test)]
     mod part_2 {
-        use crate::{
-            day_04::{parse_line_group, Passport, Solution},
-            shared::{Day, PartSolution},
-        };
+        use crate::day_04::{parse_line_group, Passport, Solution};
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {

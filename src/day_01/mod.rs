@@ -18,7 +18,7 @@ fn k_sum(nums: &[i32], target: i32, k: usize) -> Vec<Vec<i32>> {
 
     // ensure we can actually make a matching k with the values in
     // our nums
-    let average_value = target / k as i32;
+    let average_value = target / i32::try_from(k).unwrap();
 
     // ensure average value falls between
     if nums[0] > average_value || average_value > nums[nums.len() - 1] {
@@ -92,10 +92,8 @@ impl Day for Solution {
 #[cfg(test)]
 mod tests {
     mod part_1 {
-        use crate::{
-            day_01::{k_sums_unsorted, Solution},
-            shared::{Day, PartSolution},
-        };
+        use crate::day_01::{k_sums_unsorted, Solution};
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn example() {
@@ -116,10 +114,8 @@ mod tests {
     }
 
     mod part_2 {
-        use crate::{
-            day_01::{k_sums_unsorted, Solution},
-            shared::{Day, PartSolution},
-        };
+        use crate::day_01::{k_sums_unsorted, Solution};
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn example() {

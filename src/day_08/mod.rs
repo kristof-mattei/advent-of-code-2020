@@ -4,12 +4,12 @@ use crate::shared::{Day, PartSolution};
 
 #[derive(PartialEq, Eq, Debug, Clone, Copy)]
 pub enum Operation {
-    Acc(i32),
-    Jmp(i32),
-    Nop(i32),
+    Acc(isize),
+    Jmp(isize),
+    Nop(isize),
 }
 
-fn map_operation(operation: &str, argument: i32) -> Operation {
+fn map_operation(operation: &str, argument: isize) -> Operation {
     match operation {
         "acc" => Operation::Acc(argument),
         "jmp" => Operation::Jmp(argument),
@@ -23,7 +23,7 @@ pub fn parse_lines(lines: &[String]) -> Vec<Operation> {
     for line in lines {
         let split: Vec<&str> = line.split(' ').collect();
 
-        let argument = split[1].parse::<i32>().unwrap();
+        let argument = split[1].parse::<isize>().unwrap();
         let operation = map_operation(split[0], argument);
 
         instructions.push(operation);
@@ -34,30 +34,30 @@ pub fn parse_lines(lines: &[String]) -> Vec<Operation> {
 
 #[derive(PartialEq, Debug)]
 enum Ended {
-    EndlessLoop(i32),
-    TheEnd(i32),
+    EndlessLoop(isize),
+    TheEnd(isize),
 }
 
 fn execute_until_same_line_reached(operations: &[Operation]) -> Ended {
-    let length = operations.len();
+    let length: isize = operations.len().try_into().unwrap();
 
     let mut has_visited: HashSet<usize> = HashSet::new();
 
-    let mut index: i32 = 0;
+    let mut index: isize = 0;
 
-    let mut accumulator = 0;
+    let mut accumulator: isize = 0;
 
     loop {
-        if index == length as i32 {
+        if index == length {
             return Ended::TheEnd(accumulator);
         }
-        index = index.wrapping_rem_euclid(length as i32);
+        index = index.wrapping_rem_euclid(length);
 
-        if !has_visited.insert(index as usize) {
+        if !has_visited.insert(index.unsigned_abs()) {
             return Ended::EndlessLoop(accumulator);
         };
 
-        match operations.get(index as usize) {
+        match operations.get(index.unsigned_abs()) {
             Some(operation) => match operation {
                 Operation::Acc(acc) => {
                     accumulator += acc;
@@ -100,7 +100,7 @@ impl Day for Solution {
         let operations = parse_lines(&lines);
 
         if let Ended::EndlessLoop(acc) = execute_until_same_line_reached(&operations) {
-            PartSolution::I32(acc)
+            PartSolution::ISize(acc)
         } else {
             panic!("Application ended")
         }
@@ -124,7 +124,7 @@ impl Day for Solution {
             let beginning = build_new_vector(&operations, to_swap_index);
 
             match execute_until_same_line_reached(&beginning) {
-                Ended::TheEnd(acc) => return PartSolution::I32(acc),
+                Ended::TheEnd(acc) => return PartSolution::ISize(acc),
                 Ended::EndlessLoop(_) => continue,
             }
         }
@@ -137,10 +137,10 @@ impl Day for Solution {
 mod tests {
 
     mod part_1 {
-        use crate::{
-            day_08::{execute_until_same_line_reached, parse_lines, Ended, Operation, Solution},
-            shared::{Day, PartSolution},
+        use crate::day_08::{
+            execute_until_same_line_reached, parse_lines, Ended, Operation, Solution,
         };
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {
@@ -211,12 +211,12 @@ mod tests {
         fn modulo_test() {
             let items: Vec<char> = ('a'..='j').collect();
 
-            let length = items.len() as i32;
+            let length = items.len().try_into().unwrap();
 
-            for i in -10..=length {
+            for i in -10isize..=length {
                 let index = i.wrapping_rem_euclid(length);
 
-                println!("{} ({}): {}", i, index, items[index as usize]);
+                println!("{} ({}): {}", i, index, items[index.unsigned_abs()]);
             }
         }
 
@@ -239,12 +239,10 @@ mod tests {
     }
 
     mod part_2 {
-        use crate::{
-            day_08::{
-                build_new_vector, execute_until_same_line_reached, parse_lines, Ended, Solution,
-            },
-            shared::{Day, PartSolution},
+        use crate::day_08::{
+            build_new_vector, execute_until_same_line_reached, parse_lines, Ended, Solution,
         };
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {

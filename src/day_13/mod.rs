@@ -89,10 +89,9 @@ mod test {
     }
 
     mod part_1 {
-        use crate::{
-            day_13::{find_closest, parse_lines_part_1, test::get_example, Solution},
-            shared::{Day, PartSolution},
-        };
+        use crate::day_13::test::get_example;
+        use crate::day_13::{find_closest, parse_lines_part_1, Solution};
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {
@@ -112,10 +111,9 @@ mod test {
     }
 
     mod part_2 {
-        use crate::{
-            day_13::{find_one_minute_apart, parse_lines_part_2, test::get_example, Solution},
-            shared::{Day, PartSolution},
-        };
+        use crate::day_13::test::get_example;
+        use crate::day_13::{find_one_minute_apart, parse_lines_part_2, Solution};
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {

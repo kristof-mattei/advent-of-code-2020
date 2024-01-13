@@ -1,6 +1,7 @@
 use std::fmt::Display;
 
-use self::{part_1::flip_board_part_1, part_2::flip_board_part_2};
+use self::part_1::flip_board_part_1;
+use self::part_2::flip_board_part_2;
 use crate::shared::{Day, PartSolution};
 
 mod part_1;
@@ -147,15 +148,10 @@ mod test {
     }
 
     mod part_1 {
-        use crate::{
-            day_11::part_1::flip_board_part_1,
-            day_11::{
-                parse_lines,
-                test::{get_example, pretty_print},
-                Solution,
-            },
-            shared::{Day, PartSolution},
-        };
+        use crate::day_11::part_1::flip_board_part_1;
+        use crate::day_11::test::{get_example, pretty_print};
+        use crate::day_11::{parse_lines, Solution};
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {
@@ -207,15 +203,10 @@ mod test {
     }
 
     mod part_2 {
-        use crate::{
-            day_11::part_2::flip_board_part_2,
-            day_11::{
-                parse_lines,
-                test::{get_example, pretty_print},
-                Solution,
-            },
-            shared::{Day, PartSolution},
-        };
+        use crate::day_11::part_2::flip_board_part_2;
+        use crate::day_11::test::{get_example, pretty_print};
+        use crate::day_11::{parse_lines, Solution};
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {

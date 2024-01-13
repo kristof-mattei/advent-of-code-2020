@@ -245,10 +245,9 @@ mod test {
     }
 
     mod part_1 {
-        use crate::{
-            day_12::{parse_lines, pilot, test::get_example, Solution},
-            shared::{Day, PartSolution},
-        };
+        use crate::day_12::test::get_example;
+        use crate::day_12::{parse_lines, pilot, Solution};
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {
@@ -268,10 +267,9 @@ mod test {
     }
 
     mod part_2 {
-        use crate::{
-            day_12::{parse_lines, pilot_part_2, test::get_example, Solution},
-            shared::{Day, PartSolution},
-        };
+        use crate::day_12::test::get_example;
+        use crate::day_12::{parse_lines, pilot_part_2, Solution};
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {

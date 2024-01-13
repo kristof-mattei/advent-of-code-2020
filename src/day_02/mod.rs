@@ -71,8 +71,8 @@ impl Day for Solution {
             .lines()
             .map(parse_line)
             .map(|(min, max, character, password)| RuleWithPasswordPart1 {
-                min: min as u32,
-                max: max as u32,
+                min: u32::try_from(min).unwrap(),
+                max: u32::try_from(max).unwrap(),
                 character,
                 password,
             })
@@ -106,10 +106,8 @@ impl Day for Solution {
 #[cfg(test)]
 mod tests {
     mod part_1 {
-        use crate::{
-            day_02::Solution,
-            shared::{Day, PartSolution},
-        };
+        use crate::day_02::Solution;
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {
@@ -118,10 +116,8 @@ mod tests {
     }
 
     mod part_2 {
-        use crate::{
-            day_02::Solution,
-            shared::{Day, PartSolution},
-        };
+        use crate::day_02::Solution;
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {

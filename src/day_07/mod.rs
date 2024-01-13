@@ -1,5 +1,7 @@
 use core::fmt;
-use std::{cell::RefCell, collections::HashMap, rc::Rc};
+use std::cell::RefCell;
+use std::collections::HashMap;
+use std::rc::Rc;
 
 use crate::shared::{Day, PartSolution};
 
@@ -132,7 +134,7 @@ fn count_parents(bag_parsed: &HashMap<String, Rc<Bag>>, start: &str) -> u32 {
     parent_names.sort();
     parent_names.dedup();
 
-    parent_names.len() as u32
+    u32::try_from(parent_names.len()).unwrap()
 }
 
 fn count_bags_recursive(bag: &Rc<Bag>) -> u32 {
@@ -174,10 +176,8 @@ impl Day for Solution {
 mod tests {
 
     mod part_1 {
-        use crate::{
-            day_07::{count_parents, parse_bag_line, parse_bags, Solution},
-            shared::{Day, PartSolution},
-        };
+        use crate::day_07::{count_parents, parse_bag_line, parse_bags, Solution};
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {
@@ -345,10 +345,8 @@ mod tests {
     }
 
     mod part_2 {
-        use crate::{
-            day_07::{count_bags_recursive, parse_bag_line, parse_bags, Solution},
-            shared::{Day, PartSolution},
-        };
+        use crate::day_07::{count_bags_recursive, parse_bag_line, parse_bags, Solution};
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {
