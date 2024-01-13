@@ -144,7 +144,7 @@ mod tests {
 
         #[test]
         fn outcome() {
-            assert_eq!(PartSolution::I32(1584), (Solution {}).part_1());
+            assert_eq!(PartSolution::ISize(1584), (Solution {}).part_1());
         }
 
         #[test]
@@ -246,7 +246,7 @@ mod tests {
 
         #[test]
         fn outcome() {
-            assert_eq!(PartSolution::I32(920), (Solution {}).part_2());
+            assert_eq!(PartSolution::ISize(920), (Solution {}).part_2());
         }
 
         #[test]
