@@ -95,10 +95,8 @@ impl Day for Solution {
 mod tests {
 
     mod part_1 {
-        use crate::{
-            day_09::{slide_until_sum_of_any_2_in_last_x_is_not_current_value, Solution},
-            shared::{Day, PartSolution},
-        };
+        use crate::day_09::{slide_until_sum_of_any_2_in_last_x_is_not_current_value, Solution};
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {
@@ -122,10 +120,8 @@ mod tests {
     }
 
     mod part_2 {
-        use crate::{
-            day_09::{find_contiguous_set_of_numbers_that_sum_up_to, Solution},
-            shared::{Day, PartSolution},
-        };
+        use crate::day_09::{find_contiguous_set_of_numbers_that_sum_up_to, Solution};
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {

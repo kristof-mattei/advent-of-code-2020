@@ -12,7 +12,7 @@ fn parse_group_of_answers(group: &[String]) -> u32 {
     answers.sort_unstable();
     answers.dedup();
 
-    answers.len() as u32
+    answers.len().try_into().unwrap()
 }
 
 fn count_of_questions_answered_by_everybody(group: &[String]) -> u32 {
@@ -33,7 +33,7 @@ fn count_of_questions_answered_by_everybody(group: &[String]) -> u32 {
     }
 
     let mut total_answers_that_everybody_answered: u32 = 0;
-    let people_in_group = group.len() as u32;
+    let people_in_group = group.len().try_into().unwrap();
 
     for (_, value) in count_of_answers {
         if value == people_in_group {
@@ -83,10 +83,8 @@ impl Day for Solution {
 #[cfg(test)]
 mod tests {
     mod part_1 {
-        use crate::{
-            day_06::{parse_group_of_answers, Solution},
-            shared::{Day, PartSolution},
-        };
+        use crate::day_06::{parse_group_of_answers, Solution};
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {
@@ -135,10 +133,8 @@ mod tests {
     }
 
     mod part_2 {
-        use crate::{
-            day_06::{count_of_questions_answered_by_everybody, Solution},
-            shared::{Day, PartSolution},
-        };
+        use crate::day_06::{count_of_questions_answered_by_everybody, Solution};
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {

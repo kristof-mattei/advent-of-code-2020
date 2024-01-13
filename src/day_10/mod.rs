@@ -99,10 +99,8 @@ impl Day for Solution {
 mod tests {
 
     mod part_1 {
-        use crate::{
-            day_10::{calculate_step_up_differences, Solution},
-            shared::{Day, PartSolution},
-        };
+        use crate::day_10::{calculate_step_up_differences, Solution};
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {
@@ -142,10 +140,8 @@ mod tests {
 
     mod part_2 {
 
-        use crate::{
-            day_10::{calculate_possibilities, Solution},
-            shared::{Day, PartSolution},
-        };
+        use crate::day_10::{calculate_possibilities, Solution};
+        use crate::shared::{Day, PartSolution};
 
         #[test]
         fn outcome() {
