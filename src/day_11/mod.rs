@@ -79,11 +79,11 @@ impl From<char> for Thing {
 }
 
 fn count_occupied(board: &Board) -> usize {
-    return board
+    board
         .v_now
         .iter()
         .map(|row| row.iter().filter(|&&v| v == Thing::OccupiedSeat).count())
-        .sum();
+        .sum()
 }
 
 fn flip_board_until_stable_part_1(mut board: Board) -> usize {
