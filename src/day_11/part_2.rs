@@ -58,7 +58,7 @@ enum Direction {
     BottomLeft,
 }
 
-impl<'a> Iterator for NeighborIteratorPart2<'a> {
+impl Iterator for NeighborIteratorPart2<'_> {
     type Item = (usize, usize);
 
     fn next(&mut self) -> Option<Self::Item> {
