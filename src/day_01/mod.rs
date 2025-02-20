@@ -53,7 +53,7 @@ fn two_sum(nums: &[i32], target: i32) -> Vec<Vec<i32>> {
     let mut hash_set = HashSet::new();
 
     for num in nums {
-        if result.last().map_or(true, |v: &Vec<i32>| &v[0] != num)
+        if result.last().is_none_or(|v: &Vec<i32>| &v[0] != num)
             && hash_set.contains(&(target - num))
         {
             result.push(vec![*num, target - num]);
@@ -92,7 +92,7 @@ impl Day for Solution {
 #[cfg(test)]
 mod tests {
     mod part_1 {
-        use crate::day_01::{k_sums_unsorted, Solution};
+        use crate::day_01::{Solution, k_sums_unsorted};
         use crate::shared::{Day, PartSolution};
 
         #[test]
@@ -114,7 +114,7 @@ mod tests {
     }
 
     mod part_2 {
-        use crate::day_01::{k_sums_unsorted, Solution};
+        use crate::day_01::{Solution, k_sums_unsorted};
         use crate::shared::{Day, PartSolution};
 
         #[test]

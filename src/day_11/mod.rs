@@ -126,10 +126,7 @@ mod test {
     use super::Board;
 
     fn get_example() -> Vec<&'static str> {
-        include_str!("example.txt")
-            .lines()
-            .map(Into::into)
-            .collect()
+        include_str!("example.txt").lines().collect()
     }
 
     fn pretty_print(board: &Board) -> String {
@@ -150,7 +147,7 @@ mod test {
     mod part_1 {
         use crate::day_11::part_1::flip_board_part_1;
         use crate::day_11::test::{get_example, pretty_print};
-        use crate::day_11::{parse_lines, Solution};
+        use crate::day_11::{Solution, parse_lines};
         use crate::shared::{Day, PartSolution};
 
         #[test]
@@ -205,7 +202,7 @@ mod test {
     mod part_2 {
         use crate::day_11::part_2::flip_board_part_2;
         use crate::day_11::test::{get_example, pretty_print};
-        use crate::day_11::{parse_lines, Solution};
+        use crate::day_11::{Solution, parse_lines};
         use crate::shared::{Day, PartSolution};
 
         #[test]

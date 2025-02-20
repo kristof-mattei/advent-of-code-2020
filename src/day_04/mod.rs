@@ -228,7 +228,7 @@ mod tests {
 
     #[cfg(test)]
     mod part_2 {
-        use crate::day_04::{parse_line_group, Passport, Solution};
+        use crate::day_04::{Passport, Solution, parse_line_group};
         use crate::shared::{Day, PartSolution};
 
         #[test]

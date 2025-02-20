@@ -238,15 +238,12 @@ impl Day for Solution {
 #[cfg(test)]
 mod test {
     fn get_example() -> Vec<&'static str> {
-        include_str!("example.txt")
-            .lines()
-            .map(Into::into)
-            .collect()
+        include_str!("example.txt").lines().collect()
     }
 
     mod part_1 {
         use crate::day_12::test::get_example;
-        use crate::day_12::{parse_lines, pilot, Solution};
+        use crate::day_12::{Solution, parse_lines, pilot};
         use crate::shared::{Day, PartSolution};
 
         #[test]
@@ -268,7 +265,7 @@ mod test {
 
     mod part_2 {
         use crate::day_12::test::get_example;
-        use crate::day_12::{parse_lines, pilot_part_2, Solution};
+        use crate::day_12::{Solution, parse_lines, pilot_part_2};
         use crate::shared::{Day, PartSolution};
 
         #[test]

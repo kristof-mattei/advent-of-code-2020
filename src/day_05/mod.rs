@@ -76,7 +76,7 @@ impl Day for Solution {
 #[cfg(test)]
 mod tests {
     mod part_1 {
-        use crate::day_05::{parse_seat, Solution};
+        use crate::day_05::{Solution, parse_seat};
         use crate::shared::{Day, PartSolution};
 
         #[test]
@@ -114,7 +114,7 @@ mod tests {
 
     #[cfg(test)]
     mod part_2 {
-        use crate::day_05::{parse_seat, Solution};
+        use crate::day_05::{Solution, parse_seat};
         use crate::shared::{Day, PartSolution};
 
         #[test]

@@ -83,7 +83,7 @@ impl Day for Solution {
 #[cfg(test)]
 mod tests {
     mod part_1 {
-        use crate::day_06::{parse_group_of_answers, Solution};
+        use crate::day_06::{Solution, parse_group_of_answers};
         use crate::shared::{Day, PartSolution};
 
         #[test]
@@ -133,7 +133,7 @@ mod tests {
     }
 
     mod part_2 {
-        use crate::day_06::{count_of_questions_answered_by_everybody, Solution};
+        use crate::day_06::{Solution, count_of_questions_answered_by_everybody};
         use crate::shared::{Day, PartSolution};
 
         #[test]
