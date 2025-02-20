@@ -32,7 +32,7 @@ fn paths_to_end(cache: &mut HashMap<usize, u64>, adapters: &[u32], current: usiz
         .iter()
         .enumerate()
         .skip(current + 1)
-        .take_while(|(_, &v)| v - current_value <= 3)
+        .take_while(|&(_, v)| v - current_value <= 3)
         .map(|(n, _)| paths_to_end(cache, adapters, n))
         .sum();
 
@@ -99,7 +99,7 @@ impl Day for Solution {
 mod tests {
 
     mod part_1 {
-        use crate::day_10::{calculate_step_up_differences, Solution};
+        use crate::day_10::{Solution, calculate_step_up_differences};
         use crate::shared::{Day, PartSolution};
 
         #[test]
@@ -140,7 +140,7 @@ mod tests {
 
     mod part_2 {
 
-        use crate::day_10::{calculate_possibilities, Solution};
+        use crate::day_10::{Solution, calculate_possibilities};
         use crate::shared::{Day, PartSolution};
 
         #[test]

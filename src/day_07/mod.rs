@@ -176,7 +176,7 @@ impl Day for Solution {
 mod tests {
 
     mod part_1 {
-        use crate::day_07::{count_parents, parse_bag_line, parse_bags, Solution};
+        use crate::day_07::{Solution, count_parents, parse_bag_line, parse_bags};
         use crate::shared::{Day, PartSolution};
 
         #[test]
@@ -345,7 +345,7 @@ mod tests {
     }
 
     mod part_2 {
-        use crate::day_07::{count_bags_recursive, parse_bag_line, parse_bags, Solution};
+        use crate::day_07::{Solution, count_bags_recursive, parse_bag_line, parse_bags};
         use crate::shared::{Day, PartSolution};
 
         #[test]
