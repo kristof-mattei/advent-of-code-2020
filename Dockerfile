@@ -11,9 +11,9 @@ RUN --mount=type=cache,id=apt-cache-amd64,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=apt-lib-amd64,target=/var/lib/apt,sharing=locked \
     apt-get update \
     && apt-get --no-install-recommends install --yes \
-    build-essential \
-    musl-dev \
-    musl-tools
+        build-essential \
+        musl-dev \
+        musl-tools
 
 FROM rust-base AS rust-linux-amd64
 ARG TARGET=x86_64-unknown-linux-musl
@@ -25,8 +25,8 @@ RUN --mount=type=cache,id=apt-cache-arm64,from=rust-base,source=/var/cache/apt,t
     dpkg --add-architecture arm64 \
     && apt-get update \
     && apt-get --no-install-recommends install --yes \
-    libc6-dev-arm64-cross \
-    gcc-aarch64-linux-gnu
+        libc6-dev-arm64-cross \
+        gcc-aarch64-linux-gnu
 
 FROM rust-${TARGETPLATFORM//\//-} AS rust-cargo-build
 
