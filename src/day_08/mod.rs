@@ -55,7 +55,7 @@ fn execute_until_same_line_reached(operations: &[Operation]) -> Ended {
 
         if !has_visited.insert(index.unsigned_abs()) {
             return Ended::EndlessLoop(accumulator);
-        };
+        }
 
         match operations.get(index.unsigned_abs()) {
             Some(operation) => match operation {
@@ -125,7 +125,7 @@ impl Day for Solution {
 
             match execute_until_same_line_reached(&beginning) {
                 Ended::TheEnd(acc) => return PartSolution::ISize(acc),
-                Ended::EndlessLoop(_) => continue,
+                Ended::EndlessLoop(_) => {},
             }
         }
 
