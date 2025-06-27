@@ -11,7 +11,7 @@ pub enum PartSolution {
     ISize(isize),
     USize(usize),
     Vec(Vec<String>),
-    #[allow(dead_code)]
+    #[expect(unused)]
     None,
 }
 
