@@ -1,4 +1,5 @@
 {
+  "name": "advent-of-code-2020",
   "type": "module",
   "packageManager": "pnpm@10.13.1",
   "engines": {
