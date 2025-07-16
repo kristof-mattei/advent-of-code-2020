@@ -8,7 +8,7 @@ fn descent_and_go_right(
     down: usize,
     right: usize,
 ) -> u32 {
-    match &lines.get(row) {
+    match lines.get(row) {
         Some(line) => {
             if line.chars().nth(col) == Some('#') {
                 trees += 1;
@@ -53,7 +53,7 @@ impl Day for Solution {
 mod tests {
     mod part_1 {
         use crate::day_03::Solution;
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -62,7 +62,7 @@ mod tests {
     }
     mod part_2 {
         use crate::day_03::Solution;
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {

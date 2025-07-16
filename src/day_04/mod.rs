@@ -65,38 +65,40 @@ fn is_valid_height(
 impl Passport {
     fn is_byr_valid(&self) -> bool {
         match &self.byr {
-            Some(byr) => matches!(byr.parse::<u32>(), Ok(b) if (1920..=2002).contains(&b)),
+            &Some(ref byr) => matches!(byr.parse::<u32>(), Ok(b) if (1920..=2002).contains(&b)),
             _ => false,
         }
     }
     fn is_iyr_valid(&self) -> bool {
         match &self.iyr {
-            Some(iyr) => matches!(iyr.parse::<u32>(), Ok(i) if (2010..=2020).contains(&i)),
+            &Some(ref iyr) => matches!(iyr.parse::<u32>(), Ok(i) if (2010..=2020).contains(&i)),
             _ => false,
         }
     }
     fn is_eyr_valid(&self) -> bool {
         match &self.eyr {
-            Some(eyr) => matches!(eyr.parse::<u32>(), Ok(e) if (2020..=2030).contains(&e)),
+            &Some(ref eyr) => matches!(eyr.parse::<u32>(), Ok(e) if (2020..=2030).contains(&e)),
             _ => false,
         }
     }
 
     fn is_hgt_valid(&self) -> bool {
-        match &self.hgt {
-            Some(hgt) => is_valid_height(hgt, "cm", 150, 193) || is_valid_height(hgt, "in", 59, 76),
+        match self.hgt {
+            Some(ref hgt) => {
+                is_valid_height(hgt, "cm", 150, 193) || is_valid_height(hgt, "in", 59, 76)
+            },
             None => false,
         }
     }
     fn is_hcl_valid(&self) -> bool {
-        match &self.hcl {
-            Some(hcl) => is_valid_hcl(hcl),
-            _ => false,
+        match self.hcl {
+            Some(ref hcl) => is_valid_hcl(hcl),
+            None => false,
         }
     }
     fn is_ecl_valid(&self) -> bool {
-        match &self.ecl {
-            Some(ecl) => {
+        match self.ecl {
+            Some(ref ecl) => {
                 let valid_colors = ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"];
 
                 valid_colors.contains(&&**ecl)
@@ -106,8 +108,8 @@ impl Passport {
     }
 
     fn is_pid_valid(&self) -> bool {
-        match &self.pid {
-            Some(pid) => is_valid_pid(pid),
+        match self.pid {
+            Some(ref pid) => is_valid_pid(pid),
             None => false,
         }
     }
@@ -218,7 +220,7 @@ impl Day for Solution {
 mod tests {
     mod part_1 {
         use crate::day_04::Solution;
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -229,7 +231,7 @@ mod tests {
     #[cfg(test)]
     mod part_2 {
         use crate::day_04::{Passport, Solution, parse_line_group};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -237,9 +239,9 @@ mod tests {
         }
 
         #[test]
-        fn test_byr_2002_valid() {
+        fn byr_2002_valid() {
             let passport = Passport {
-                byr: Some("2002".to_string()),
+                byr: Some("2002".to_owned()),
                 ..Passport::default()
             };
 
@@ -247,9 +249,9 @@ mod tests {
         }
 
         #[test]
-        fn test_byr_2003_invalid() {
+        fn byr_2003_invalid() {
             let passport = Passport {
-                byr: Some("2003".to_string()),
+                byr: Some("2003".to_owned()),
                 ..Passport::default()
             };
 
@@ -257,9 +259,9 @@ mod tests {
         }
 
         #[test]
-        fn test_hgt_60in_valid() {
+        fn hgt_60in_valid() {
             let passport = Passport {
-                hgt: Some("60in".to_string()),
+                hgt: Some("60in".to_owned()),
                 ..Passport::default()
             };
 
@@ -267,9 +269,9 @@ mod tests {
         }
 
         #[test]
-        fn test_hgt_190cm_valid() {
+        fn hgt_190cm_valid() {
             let passport = Passport {
-                hgt: Some("190cm".to_string()),
+                hgt: Some("190cm".to_owned()),
                 ..Passport::default()
             };
 
@@ -277,9 +279,9 @@ mod tests {
         }
 
         #[test]
-        fn test_hgt_190in_invalid() {
+        fn hgt_190in_invalid() {
             let passport = Passport {
-                hgt: Some("190in".to_string()),
+                hgt: Some("190in".to_owned()),
                 ..Passport::default()
             };
 
@@ -287,9 +289,9 @@ mod tests {
         }
 
         #[test]
-        fn test_hgt_190_invalid() {
+        fn hgt_190_invalid() {
             let passport = Passport {
-                hgt: Some("190".to_string()),
+                hgt: Some("190".to_owned()),
                 ..Passport::default()
             };
 
@@ -297,9 +299,9 @@ mod tests {
         }
 
         #[test]
-        fn test_hcl_pound123abc_valid() {
+        fn hcl_pound123abc_valid() {
             let passport = Passport {
-                hcl: Some("#123abc".to_string()),
+                hcl: Some("#123abc".to_owned()),
                 ..Passport::default()
             };
 
@@ -307,18 +309,18 @@ mod tests {
         }
 
         #[test]
-        fn test_hcl_pound123abz_invalid() {
+        fn hcl_pound123abz_invalid() {
             let passport = Passport {
-                hcl: Some("#123abz".to_string()),
+                hcl: Some("#123abz".to_owned()),
                 ..Passport::default()
             };
 
             assert!(!passport.is_hcl_valid());
         }
         #[test]
-        fn test_hcl_123abz_invalid() {
+        fn hcl_123abz_invalid() {
             let passport = Passport {
-                hcl: Some("123abz".to_string()),
+                hcl: Some("123abz".to_owned()),
                 ..Passport::default()
             };
 
@@ -326,9 +328,9 @@ mod tests {
         }
 
         #[test]
-        fn test_ecl_brn_valid() {
+        fn ecl_brn_valid() {
             let passport = Passport {
-                ecl: Some("brn".to_string()),
+                ecl: Some("brn".to_owned()),
                 ..Passport::default()
             };
 
@@ -336,9 +338,9 @@ mod tests {
         }
 
         #[test]
-        fn test_ecl_wat_invalid() {
+        fn ecl_wat_invalid() {
             let passport = Passport {
-                ecl: Some("wat".to_string()),
+                ecl: Some("wat".to_owned()),
                 ..Passport::default()
             };
 
@@ -346,9 +348,9 @@ mod tests {
         }
 
         #[test]
-        fn test_pid_000000001_valid() {
+        fn pid_000000001_valid() {
             let passport = Passport {
-                pid: Some("000000001".to_string()),
+                pid: Some("000000001".to_owned()),
                 ..Passport::default()
             };
 
@@ -356,7 +358,7 @@ mod tests {
         }
 
         #[test]
-        fn test_pid_0123456789_invalid() {
+        fn pid_0123456789_invalid() {
             let passport = Passport {
                 pid: Some("0123456789".into()),
                 ..Passport::default()
@@ -366,7 +368,7 @@ mod tests {
         }
 
         fn arr_of_amp_str_to_vec_of_string(arr: &[&str]) -> Vec<String> {
-            arr.iter().map(|s| (*s).to_string()).collect()
+            arr.iter().map(|s| (*s).to_owned()).collect()
         }
 
         #[test]

@@ -96,7 +96,7 @@ mod tests {
 
     mod part_1 {
         use crate::day_09::{Solution, slide_until_sum_of_any_2_in_last_x_is_not_current_value};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -104,7 +104,7 @@ mod tests {
         }
 
         #[test]
-        fn test_example() {
+        fn example() {
             let input: Vec<u64> = vec![
                 "35", "20", "15", "25", "47", "40", "62", "55", "65", "95", "102", "117", "150",
                 "182", "127", "219", "299", "277", "309", "576",
@@ -121,7 +121,7 @@ mod tests {
 
     mod part_2 {
         use crate::day_09::{Solution, find_contiguous_set_of_numbers_that_sum_up_to};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -129,7 +129,7 @@ mod tests {
         }
 
         #[test]
-        fn test_example() {
+        fn example() {
             let input: Vec<u64> = vec![
                 "35", "20", "15", "25", "47", "40", "62", "55", "65", "95", "102", "117", "150",
                 "182", "127", "219", "299", "277", "309", "576",
