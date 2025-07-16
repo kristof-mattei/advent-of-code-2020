@@ -101,7 +101,7 @@ pub struct Solution {}
 
 impl Day for Solution {
     fn part_1(&self) -> PartSolution {
-        let lines: Vec<&str> = include_str!("input.txt").lines().collect();
+        let lines: Vec<&str> = include_str!("day_11/input.txt").lines().collect();
 
         let board = parse_lines(&lines);
 
@@ -111,7 +111,7 @@ impl Day for Solution {
     }
 
     fn part_2(&self) -> PartSolution {
-        let lines: Vec<&str> = include_str!("input.txt").lines().collect();
+        let lines: Vec<&str> = include_str!("day_11/input.txt").lines().collect();
 
         let board = parse_lines(&lines);
 
@@ -126,7 +126,7 @@ mod test {
     use super::Board;
 
     fn get_example() -> Vec<&'static str> {
-        include_str!("example.txt").lines().collect()
+        include_str!("day_11/example.txt").lines().collect()
     }
 
     fn pretty_print(board: &Board) -> String {

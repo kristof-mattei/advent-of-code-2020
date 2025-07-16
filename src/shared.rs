@@ -11,7 +11,7 @@ pub enum PartSolution {
     ISize(isize),
     USize(usize),
     Vec(Vec<String>),
-    #[expect(unused)]
+    #[expect(unused, reason = "It's from our shared lib")]
     None,
 }
 

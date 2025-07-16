@@ -73,7 +73,7 @@ pub struct Solution {}
 
 impl Day for Solution {
     fn part_1(&self) -> PartSolution {
-        let input: Vec<u32> = include_str!("input.txt")
+        let input: Vec<u32> = include_str!("day_10/input.txt")
             .lines()
             .map(|s| s.parse::<u32>().unwrap())
             .collect();
@@ -84,7 +84,7 @@ impl Day for Solution {
     }
 
     fn part_2(&self) -> PartSolution {
-        let input: Vec<u32> = include_str!("input.txt")
+        let input: Vec<u32> = include_str!("day_10/input.txt")
             .lines()
             .map(|s| s.parse::<u32>().unwrap())
             .collect();

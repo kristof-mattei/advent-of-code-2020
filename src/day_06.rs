@@ -56,7 +56,10 @@ pub struct Solution {}
 
 impl Day for Solution {
     fn part_1(&self) -> PartSolution {
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_06/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
 
         let mut all_answers: Vec<u32> = Vec::new();
 
@@ -72,7 +75,10 @@ impl Day for Solution {
     }
 
     fn part_2(&self) -> PartSolution {
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_06/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
 
         let mut all_answers: Vec<u32> = Vec::new();
 
