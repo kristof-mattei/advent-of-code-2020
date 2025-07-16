@@ -154,8 +154,8 @@ fn get_seat_next_state(board: &Board, row_index: usize, col_index: usize) -> (Th
         .get(row_index)
         .and_then(|row| row.get(col_index))
     {
-        Some(Thing::Floor) => (Thing::Floor, false),
-        Some(Thing::EmptySeat) => {
+        Some(&Thing::Floor) => (Thing::Floor, false),
+        Some(&Thing::EmptySeat) => {
             // empty seat with no occupied seats becomes occupied
             // meaning if at least one of the seats is occupied we remain empty
             for (n_row_index, n_col_index) in
@@ -168,10 +168,10 @@ fn get_seat_next_state(board: &Board, row_index: usize, col_index: usize) -> (Th
 
             (Thing::OccupiedSeat, true)
         },
-        Some(Thing::OccupiedSeat) => {
+        Some(&Thing::OccupiedSeat) => {
             // occupied seat with >=4 neighbors occupied becomes empty
 
-            let mut occupied = 0u32;
+            let mut occupied = 0_u32;
 
             for (n_row_index, n_col_index) in
                 NeighborIteratorPart1::new(board, row_index, col_index)

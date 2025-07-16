@@ -93,7 +93,7 @@ impl Day for Solution {
 mod tests {
     mod part_1 {
         use crate::day_01::{Solution, k_sums_unsorted};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn example() {
@@ -115,7 +115,7 @@ mod tests {
 
     mod part_2 {
         use crate::day_01::{Solution, k_sums_unsorted};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn example() {

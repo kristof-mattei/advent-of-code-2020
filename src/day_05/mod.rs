@@ -77,7 +77,7 @@ impl Day for Solution {
 mod tests {
     mod part_1 {
         use crate::day_05::{Solution, parse_seat};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -115,7 +115,7 @@ mod tests {
     #[cfg(test)]
     mod part_2 {
         use crate::day_05::{Solution, parse_seat};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {

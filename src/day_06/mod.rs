@@ -23,18 +23,26 @@ fn count_of_questions_answered_by_everybody(group: &[String]) -> u32 {
         duplicate_answer_per_line_check.sort_unstable();
         duplicate_answer_per_line_check.dedup();
 
-        assert_eq!(duplicate_answer_per_line_check.len(), line.len());
+        assert_eq!(
+            duplicate_answer_per_line_check.len(),
+            line.len(),
+            "Length doesn't match duplicate answer"
+        );
 
         for c in duplicate_answer_per_line_check {
             let count = *(count_of_answers.get(&c).unwrap_or(&0));
 
-            let _ = count_of_answers.insert(c, count + 1);
+            let _: Option<u32> = count_of_answers.insert(c, count + 1);
         }
     }
 
     let mut total_answers_that_everybody_answered: u32 = 0;
     let people_in_group = group.len().try_into().unwrap();
 
+    #[expect(
+        clippy::iter_over_hash_type,
+        reason = "We go through all of them, sorting is redundant"
+    )]
     for (_, value) in count_of_answers {
         if value == people_in_group {
             total_answers_that_everybody_answered += 1;
@@ -84,7 +92,7 @@ impl Day for Solution {
 mod tests {
     mod part_1 {
         use crate::day_06::{Solution, parse_group_of_answers};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -93,21 +101,21 @@ mod tests {
 
         #[test]
         fn answer_set_1() {
-            let answer_set = ["abc".to_string()];
+            let answer_set = ["abc".to_owned()];
 
             assert_eq!(parse_group_of_answers(&answer_set), 3);
         }
 
         #[test]
         fn answer_set_2() {
-            let answer_set = ["a".to_string(), "b".to_string(), "c".to_string()];
+            let answer_set = ["a".to_owned(), "b".to_owned(), "c".to_owned()];
 
             assert_eq!(parse_group_of_answers(&answer_set), 3);
         }
 
         #[test]
         fn answer_set_3() {
-            let answer_set = ["ab".to_string(), "ac".to_string()];
+            let answer_set = ["ab".to_owned(), "ac".to_owned()];
 
             assert_eq!(parse_group_of_answers(&answer_set), 3);
         }
@@ -115,10 +123,10 @@ mod tests {
         #[test]
         fn answer_set_4() {
             let answer_set = [
-                "a".to_string(),
-                "a".to_string(),
-                "a".to_string(),
-                "a".to_string(),
+                "a".to_owned(),
+                "a".to_owned(),
+                "a".to_owned(),
+                "a".to_owned(),
             ];
 
             assert_eq!(parse_group_of_answers(&answer_set), 1);
@@ -126,7 +134,7 @@ mod tests {
 
         #[test]
         fn answer_set_5() {
-            let answer_set = ["b".to_string()];
+            let answer_set = ["b".to_owned()];
 
             assert_eq!(parse_group_of_answers(&answer_set), 1);
         }
@@ -134,7 +142,7 @@ mod tests {
 
     mod part_2 {
         use crate::day_06::{Solution, count_of_questions_answered_by_everybody};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -143,21 +151,21 @@ mod tests {
 
         #[test]
         fn answer_set_1() {
-            let answer_set = ["abc".to_string()];
+            let answer_set = ["abc".to_owned()];
 
             assert_eq!(count_of_questions_answered_by_everybody(&answer_set), 3);
         }
 
         #[test]
         fn answer_set_2() {
-            let answer_set = ["a".to_string(), "b".to_string(), "c".to_string()];
+            let answer_set = ["a".to_owned(), "b".to_owned(), "c".to_owned()];
 
             assert_eq!(count_of_questions_answered_by_everybody(&answer_set), 0);
         }
 
         #[test]
         fn answer_set_3() {
-            let answer_set = ["ab".to_string(), "ac".to_string()];
+            let answer_set = ["ab".to_owned(), "ac".to_owned()];
 
             assert_eq!(count_of_questions_answered_by_everybody(&answer_set), 1);
         }
@@ -165,10 +173,10 @@ mod tests {
         #[test]
         fn answer_set_4() {
             let answer_set = [
-                "a".to_string(),
-                "a".to_string(),
-                "a".to_string(),
-                "a".to_string(),
+                "a".to_owned(),
+                "a".to_owned(),
+                "a".to_owned(),
+                "a".to_owned(),
             ];
 
             assert_eq!(count_of_questions_answered_by_everybody(&answer_set), 1);
@@ -176,7 +184,7 @@ mod tests {
 
         #[test]
         fn answer_set_5() {
-            let answer_set = ["b".to_string()];
+            let answer_set = ["b".to_owned()];
 
             assert_eq!(count_of_questions_answered_by_everybody(&answer_set), 1);
         }
