@@ -34,7 +34,10 @@ pub struct Solution {}
 
 impl Day for Solution {
     fn part_1(&self) -> PartSolution {
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_05/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
 
         let max = lines
             .iter()
@@ -47,7 +50,10 @@ impl Day for Solution {
     }
 
     fn part_2(&self) -> PartSolution {
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_05/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
 
         let mut items: Vec<u32> = lines
             .iter()
@@ -77,7 +83,7 @@ impl Day for Solution {
 mod tests {
     mod part_1 {
         use crate::day_05::{Solution, parse_seat};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -115,7 +121,7 @@ mod tests {
     #[cfg(test)]
     mod part_2 {
         use crate::day_05::{Solution, parse_seat};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {

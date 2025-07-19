@@ -8,7 +8,7 @@ fn descent_and_go_right(
     down: usize,
     right: usize,
 ) -> u32 {
-    match &lines.get(row) {
+    match lines.get(row) {
         Some(line) => {
             if line.chars().nth(col) == Some('#') {
                 trees += 1;
@@ -31,13 +31,19 @@ pub struct Solution {}
 
 impl Day for Solution {
     fn part_1(&self) -> PartSolution {
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_03/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
 
         PartSolution::U32(descent_and_go_right(&lines, 0, 0, 0, 1, 3))
     }
 
     fn part_2(&self) -> PartSolution {
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_03/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
 
         let result1 = descent_and_go_right(&lines, 0, 0, 0, 1, 1);
         let result2 = descent_and_go_right(&lines, 0, 0, 0, 1, 3);
@@ -53,7 +59,7 @@ impl Day for Solution {
 mod tests {
     mod part_1 {
         use crate::day_03::Solution;
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -62,7 +68,7 @@ mod tests {
     }
     mod part_2 {
         use crate::day_03::Solution;
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {

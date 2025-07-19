@@ -72,7 +72,10 @@ pub struct Solution {}
 
 impl Day for Solution {
     fn part_1(&self) -> PartSolution {
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_09/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
         let input: Vec<u64> = lines.iter().map(|s| s.parse::<u64>().unwrap()).collect();
 
         let solution = slide_until_sum_of_any_2_in_last_x_is_not_current_value(&input, 25);
@@ -82,7 +85,10 @@ impl Day for Solution {
 
     fn part_2(&self) -> PartSolution {
         const TARGET: u64 = 138_879_426; // from day 9 part 1;
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_09/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
         let input: Vec<u64> = lines.iter().map(|s| s.parse::<u64>().unwrap()).collect();
 
         let (lowest, highest) = find_contiguous_set_of_numbers_that_sum_up_to(&input, TARGET);
@@ -96,7 +102,7 @@ mod tests {
 
     mod part_1 {
         use crate::day_09::{Solution, slide_until_sum_of_any_2_in_last_x_is_not_current_value};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -104,7 +110,7 @@ mod tests {
         }
 
         #[test]
-        fn test_example() {
+        fn example() {
             let input: Vec<u64> = vec![
                 "35", "20", "15", "25", "47", "40", "62", "55", "65", "95", "102", "117", "150",
                 "182", "127", "219", "299", "277", "309", "576",
@@ -121,7 +127,7 @@ mod tests {
 
     mod part_2 {
         use crate::day_09::{Solution, find_contiguous_set_of_numbers_that_sum_up_to};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -129,7 +135,7 @@ mod tests {
         }
 
         #[test]
-        fn test_example() {
+        fn example() {
             let input: Vec<u64> = vec![
                 "35", "20", "15", "25", "47", "40", "62", "55", "65", "95", "102", "117", "150",
                 "182", "127", "219", "299", "277", "309", "576",

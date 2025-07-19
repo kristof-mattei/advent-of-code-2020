@@ -44,7 +44,7 @@ fn find_one_minute_apart(mut buses: Vec<(usize, usize)>) -> usize {
     let mut step_size = buses.first().unwrap().1;
     let mut time = 0;
 
-    buses.iter().skip(1).for_each(|(offset, bus)| {
+    buses.iter().skip(1).for_each(|&(offset, bus)| {
         while (time + offset) % bus != 0 {
             time += step_size;
         }
@@ -59,7 +59,7 @@ pub struct Solution {}
 
 impl Day for Solution {
     fn part_1(&self) -> PartSolution {
-        let lines: Vec<&str> = include_str!("input.txt").lines().collect();
+        let lines: Vec<&str> = include_str!("day_13/input.txt").lines().collect();
 
         let (time, buses) = parse_lines_part_1(&lines);
 
@@ -69,7 +69,7 @@ impl Day for Solution {
     }
 
     fn part_2(&self) -> PartSolution {
-        let lines: Vec<&str> = include_str!("input.txt").lines().collect();
+        let lines: Vec<&str> = include_str!("day_13/input.txt").lines().collect();
 
         let buses = parse_lines_part_2(&lines);
 
@@ -82,13 +82,13 @@ impl Day for Solution {
 #[cfg(test)]
 mod test {
     fn get_example() -> Vec<&'static str> {
-        include_str!("example.txt").lines().collect()
+        include_str!("day_13/example.txt").lines().collect()
     }
 
     mod part_1 {
         use crate::day_13::test::get_example;
         use crate::day_13::{Solution, find_closest, parse_lines_part_1};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -110,7 +110,7 @@ mod test {
     mod part_2 {
         use crate::day_13::test::get_example;
         use crate::day_13::{Solution, find_one_minute_apart, parse_lines_part_2};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {

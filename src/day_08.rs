@@ -58,7 +58,7 @@ fn execute_until_same_line_reached(operations: &[Operation]) -> Ended {
         }
 
         match operations.get(index.unsigned_abs()) {
-            Some(operation) => match operation {
+            Some(operation) => match *operation {
                 Operation::Acc(acc) => {
                     accumulator += acc;
                     index += 1;
@@ -95,7 +95,10 @@ pub struct Solution {}
 
 impl Day for Solution {
     fn part_1(&self) -> PartSolution {
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_08/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
 
         let operations = parse_lines(&lines);
 
@@ -107,14 +110,17 @@ impl Day for Solution {
     }
 
     fn part_2(&self) -> PartSolution {
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_08/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
 
         let operations = parse_lines(&lines);
 
         let to_swap: Vec<usize> = operations
             .iter()
             .enumerate()
-            .filter_map(|(index, f)| match f {
+            .filter_map(|(index, f)| match *f {
                 Operation::Nop(_) | Operation::Jmp(_) => Some(index),
                 Operation::Acc(_) => None,
             })
@@ -140,7 +146,7 @@ mod tests {
         use crate::day_08::{
             Ended, Operation, Solution, execute_until_same_line_reached, parse_lines,
         };
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -148,8 +154,8 @@ mod tests {
         }
 
         #[test]
-        fn test_nop_postive() {
-            let input = vec!["nop +1".to_string()];
+        fn nop_postive() {
+            let input = vec!["nop +1".to_owned()];
 
             let expected = Operation::Nop(1);
             let parsed = parse_lines(&input);
@@ -158,8 +164,8 @@ mod tests {
         }
 
         #[test]
-        fn test_nop_negative() {
-            let input = vec!["nop -20".to_string()];
+        fn nop_negative() {
+            let input = vec!["nop -20".to_owned()];
 
             let expected = Operation::Nop(-20);
             let parsed = parse_lines(&input);
@@ -168,8 +174,8 @@ mod tests {
         }
 
         #[test]
-        fn test_jmp_positive() {
-            let input = vec!["jmp +3".to_string()];
+        fn jmp_positive() {
+            let input = vec!["jmp +3".to_owned()];
 
             let expected = Operation::Jmp(3);
             let parsed = parse_lines(&input);
@@ -178,8 +184,8 @@ mod tests {
         }
 
         #[test]
-        fn test_jmp_negative() {
-            let input = vec!["jmp -4".to_string()];
+        fn jmp_negative() {
+            let input = vec!["jmp -4".to_owned()];
 
             let expected = Operation::Jmp(-4);
             let parsed = parse_lines(&input);
@@ -188,8 +194,8 @@ mod tests {
         }
 
         #[test]
-        fn test_acc_positive() {
-            let input = vec!["acc +5".to_string()];
+        fn acc_positive() {
+            let input = vec!["acc +5".to_owned()];
 
             let expected = Operation::Acc(5);
             let parsed = parse_lines(&input);
@@ -198,8 +204,8 @@ mod tests {
         }
 
         #[test]
-        fn test_acc_negative() {
-            let input = vec!["acc -6".to_string()];
+        fn acc_negative() {
+            let input = vec!["acc -6".to_owned()];
 
             let expected = Operation::Acc(-6);
             let parsed = parse_lines(&input);
@@ -213,7 +219,7 @@ mod tests {
 
             let length = items.len().try_into().unwrap();
 
-            for i in -10isize..=length {
+            for i in -10_isize..=length {
                 let index = i.wrapping_rem_euclid(length);
 
                 println!("{} ({}): {}", i, index, items[index.unsigned_abs()]);
@@ -221,13 +227,13 @@ mod tests {
         }
 
         #[test]
-        fn test_example() {
+        fn example() {
             let input: Vec<String> = [
                 "nop +0", "acc +1", "jmp +4", "acc +3", "jmp -3", "acc -99", "acc +1", "jmp -4",
                 "acc +6",
             ]
             .iter()
-            .map(|s| (*s).to_string())
+            .map(|s| (*s).to_owned())
             .collect();
 
             let operations = parse_lines(&input);
@@ -242,7 +248,7 @@ mod tests {
         use crate::day_08::{
             Ended, Solution, build_new_vector, execute_until_same_line_reached, parse_lines,
         };
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -256,7 +262,7 @@ mod tests {
                 "acc +6",
             ]
             .iter()
-            .map(|s| (*s).to_string())
+            .map(|s| (*s).to_owned())
             .collect();
 
             let operations = parse_lines(&input);

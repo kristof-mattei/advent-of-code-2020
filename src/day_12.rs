@@ -37,7 +37,7 @@ enum Operation {
 
 impl std::fmt::Display for Operation {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match *self {
             Operation::MoveNorth(v) => write!(f, "N{}", v),
             Operation::MoveSouth(v) => write!(f, "S{}", v),
             Operation::MoveEast(v) => write!(f, "E{}", v),
@@ -58,7 +58,7 @@ enum Direction {
 
 impl Direction {
     fn rotate(&mut self, how_much: i32) {
-        let new = match self {
+        let new = match *self {
             Direction::North => how_much,
             Direction::South => 180 + how_much,
             Direction::East => 90 + how_much,
@@ -95,7 +95,7 @@ impl Ship {
     }
 
     fn process_operation(&mut self, operation: &Operation) {
-        match operation {
+        match *operation {
             Operation::MoveNorth(v) => {
                 self.location_y -= v;
             },
@@ -108,13 +108,13 @@ impl Ship {
             Operation::MoveWest(v) => {
                 self.location_x -= v;
             },
-            Operation::RotateLeft(l) => self.facing.rotate(-*l),
-            Operation::RotateRight(r) => self.facing.rotate(*r),
+            Operation::RotateLeft(l) => self.facing.rotate(-l),
+            Operation::RotateRight(r) => self.facing.rotate(r),
             Operation::MoveForward(v) => match self.facing {
-                Direction::North => self.process_operation(&Operation::MoveNorth(*v)),
-                Direction::South => self.process_operation(&Operation::MoveSouth(*v)),
-                Direction::East => self.process_operation(&Operation::MoveEast(*v)),
-                Direction::West => self.process_operation(&Operation::MoveWest(*v)),
+                Direction::North => self.process_operation(&Operation::MoveNorth(v)),
+                Direction::South => self.process_operation(&Operation::MoveSouth(v)),
+                Direction::East => self.process_operation(&Operation::MoveEast(v)),
+                Direction::West => self.process_operation(&Operation::MoveWest(v)),
             },
         }
     }
@@ -138,7 +138,7 @@ impl ShipAndWaypoint {
     }
 
     fn process_operation_part_2(&mut self, operation: &Operation) {
-        match operation {
+        match *operation {
             Operation::MoveNorth(v) => {
                 self.waypoint_location_y -= v;
             },
@@ -153,7 +153,7 @@ impl ShipAndWaypoint {
             },
             Operation::RotateLeft(l) => {
                 // CCW
-                self.process_operation_part_2(&Operation::RotateRight(360 - *l));
+                self.process_operation_part_2(&Operation::RotateRight(360 - l));
             },
             Operation::RotateRight(r) => {
                 // CW
@@ -184,8 +184,8 @@ impl ShipAndWaypoint {
                 }
             },
             Operation::MoveForward(v) => {
-                self.ship_location_x += self.waypoint_location_x * *v;
-                self.ship_location_y += self.waypoint_location_y * *v;
+                self.ship_location_x += self.waypoint_location_x * v;
+                self.ship_location_y += self.waypoint_location_y * v;
             },
         }
     }
@@ -215,7 +215,7 @@ pub struct Solution {}
 
 impl Day for Solution {
     fn part_1(&self) -> PartSolution {
-        let lines: Vec<&str> = include_str!("input.txt").lines().collect();
+        let lines: Vec<&str> = include_str!("day_12/input.txt").lines().collect();
 
         let operations = parse_lines(&lines);
 
@@ -225,7 +225,7 @@ impl Day for Solution {
     }
 
     fn part_2(&self) -> PartSolution {
-        let lines: Vec<&str> = include_str!("input.txt").lines().collect();
+        let lines: Vec<&str> = include_str!("day_12/input.txt").lines().collect();
 
         let parsed = parse_lines(&lines);
 
@@ -238,13 +238,13 @@ impl Day for Solution {
 #[cfg(test)]
 mod test {
     fn get_example() -> Vec<&'static str> {
-        include_str!("example.txt").lines().collect()
+        include_str!("day_12/example.txt").lines().collect()
     }
 
     mod part_1 {
         use crate::day_12::test::get_example;
         use crate::day_12::{Solution, parse_lines, pilot};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -266,7 +266,7 @@ mod test {
     mod part_2 {
         use crate::day_12::test::get_example;
         use crate::day_12::{Solution, parse_lines, pilot_part_2};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {

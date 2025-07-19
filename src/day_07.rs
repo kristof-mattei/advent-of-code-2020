@@ -18,7 +18,7 @@ impl fmt::Display for Bag {
             .children
             .borrow()
             .iter()
-            .map(|(count, bag)| format!("Name: {}, count: {}", &bag.name, count))
+            .map(|&(ref count, ref bag)| format!("Name: {}, count: {}", &bag.name, count))
             .collect();
 
         let parent_names: Vec<String> = self
@@ -41,7 +41,7 @@ pub fn map_bag_color_with_count(bag_color_with_count: &str) -> (u32, String) {
 
     let _test: Vec<char> = bag_color_with_count.chars().collect();
 
-    (split.0.parse().unwrap(), split.1.to_string())
+    (split.0.parse().unwrap(), split.1.to_owned())
 }
 
 pub fn parse_bag_line(bag_line: &str) -> (String, Vec<(u32, String)>) {
@@ -57,7 +57,7 @@ pub fn parse_bag_line(bag_line: &str) -> (String, Vec<(u32, String)>) {
     let inside_bags = split.get(1).unwrap().trim();
 
     if inside_bags == "no other" {
-        return (bag_name.to_string(), Vec::<(u32, String)>::new());
+        return (bag_name.to_owned(), Vec::<(u32, String)>::new());
     }
 
     let inside_bags_with_count = inside_bags
@@ -65,7 +65,7 @@ pub fn parse_bag_line(bag_line: &str) -> (String, Vec<(u32, String)>) {
         .map(map_bag_color_with_count)
         .collect();
 
-    (bag_name.to_string(), inside_bags_with_count)
+    (bag_name.to_owned(), inside_bags_with_count)
 }
 
 pub fn parse_bags(bag_lines: &[String]) -> HashMap<String, Rc<Bag>> {
@@ -77,21 +77,19 @@ pub fn parse_bags(bag_lines: &[String]) -> HashMap<String, Rc<Bag>> {
         let mut parsed_child_bags_current_line: Vec<(u32, Rc<Bag>)> = Vec::new();
 
         for (count, child_bag_name) in count_with_bag_name {
-            let bag = bag_parsed
-                .entry(child_bag_name.to_string())
-                .or_insert_with(|| {
-                    Rc::new(Bag {
-                        name: child_bag_name.to_string(),
-                        ..Bag::default()
-                    })
-                });
+            let bag = bag_parsed.entry(child_bag_name.clone()).or_insert_with(|| {
+                Rc::new(Bag {
+                    name: child_bag_name.clone(),
+                    ..Bag::default()
+                })
+            });
 
             parsed_child_bags_current_line.push((count, Rc::clone(bag)));
         }
 
-        let bag: &Rc<Bag> = bag_parsed.entry(bag_name.to_string()).or_insert_with(|| {
+        let bag: &Rc<Bag> = bag_parsed.entry(bag_name.clone()).or_insert_with(|| {
             Rc::new(Bag {
-                name: bag_name.to_string(),
+                name: bag_name.clone(),
                 ..Bag::default()
             })
         });
@@ -142,7 +140,7 @@ fn count_bags_recursive(bag: &Rc<Bag>) -> u32 {
 
     children
         .iter()
-        .map(|(c, b)| {
+        .map(|&(c, ref b)| {
             let sum_of_children = count_bags_recursive(b);
 
             c + c * sum_of_children
@@ -155,7 +153,10 @@ pub struct Solution {}
 impl Day for Solution {
     fn part_1(&self) -> PartSolution {
         const BAG_NAME: &str = "shiny gold";
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_07/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
 
         let bags = parse_bags(&lines);
 
@@ -164,7 +165,10 @@ impl Day for Solution {
 
     fn part_2(&self) -> PartSolution {
         const BAG_NAME: &str = "shiny gold";
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_07/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
 
         let bags = parse_bags(&lines);
 
@@ -177,7 +181,7 @@ mod tests {
 
     mod part_1 {
         use crate::day_07::{Solution, count_parents, parse_bag_line, parse_bags};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -193,10 +197,10 @@ mod tests {
             assert_eq!(
                 result,
                 (
-                    "light red".to_string(),
+                    "light red".to_owned(),
                     vec![
-                        (1, "bright white".to_string()),
-                        (2, "muted yellow".to_string())
+                        (1, "bright white".to_owned()),
+                        (2, "muted yellow".to_owned())
                     ]
                 ),
             );
@@ -211,10 +215,10 @@ mod tests {
             assert_eq!(
                 result,
                 (
-                    "dark orange".to_string(),
+                    "dark orange".to_owned(),
                     vec![
-                        (3, "bright white".to_string()),
-                        (4, "muted yellow".to_string())
+                        (3, "bright white".to_owned()),
+                        (4, "muted yellow".to_owned())
                     ]
                 ),
             );
@@ -229,8 +233,8 @@ mod tests {
             assert_eq!(
                 result,
                 (
-                    "bright white".to_string(),
-                    vec![(1, "shiny gold".to_string())]
+                    "bright white".to_owned(),
+                    vec![(1, "shiny gold".to_owned())]
                 ),
             );
         }
@@ -244,8 +248,8 @@ mod tests {
             assert_eq!(
                 result,
                 (
-                    "muted yellow".to_string(),
-                    vec![(2, "shiny gold".to_string()), (9, "faded blue".to_string())]
+                    "muted yellow".to_owned(),
+                    vec![(2, "shiny gold".to_owned()), (9, "faded blue".to_owned())]
                 ),
             );
         }
@@ -259,11 +263,8 @@ mod tests {
             assert_eq!(
                 result,
                 (
-                    "shiny gold".to_string(),
-                    vec![
-                        (1, "dark olive".to_string()),
-                        (2, "vibrant plum".to_string())
-                    ]
+                    "shiny gold".to_owned(),
+                    vec![(1, "dark olive".to_owned()), (2, "vibrant plum".to_owned())]
                 ),
             );
         }
@@ -277,11 +278,8 @@ mod tests {
             assert_eq!(
                 result,
                 (
-                    "dark olive".to_string(),
-                    vec![
-                        (3, "faded blue".to_string()),
-                        (4, "dotted black".to_string())
-                    ]
+                    "dark olive".to_owned(),
+                    vec![(3, "faded blue".to_owned()), (4, "dotted black".to_owned())]
                 ),
             );
         }
@@ -295,11 +293,8 @@ mod tests {
             assert_eq!(
                 result,
                 (
-                    "vibrant plum".to_string(),
-                    vec![
-                        (5, "faded blue".to_string()),
-                        (6, "dotted black".to_string())
-                    ]
+                    "vibrant plum".to_owned(),
+                    vec![(5, "faded blue".to_owned()), (6, "dotted black".to_owned())]
                 ),
             );
         }
@@ -310,7 +305,7 @@ mod tests {
 
             let result = parse_bag_line(input);
 
-            assert_eq!(result, ("faded blue".to_string(), vec![]));
+            assert_eq!(result, ("faded blue".to_owned(), vec![]));
         }
 
         #[test]
@@ -319,7 +314,7 @@ mod tests {
 
             let result = parse_bag_line(input);
 
-            assert_eq!(result, ("dotted black".to_string(), vec![]));
+            assert_eq!(result, ("dotted black".to_owned(), vec![]));
         }
 
         #[test]
@@ -346,7 +341,7 @@ mod tests {
 
     mod part_2 {
         use crate::day_07::{Solution, count_bags_recursive, parse_bag_line, parse_bags};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -362,10 +357,10 @@ mod tests {
             assert_eq!(
                 result,
                 (
-                    "light red".to_string(),
+                    "light red".to_owned(),
                     vec![
-                        (1, "bright white".to_string()),
-                        (2, "muted yellow".to_string())
+                        (1, "bright white".to_owned()),
+                        (2, "muted yellow".to_owned())
                     ]
                 ),
             );
@@ -380,10 +375,10 @@ mod tests {
             assert_eq!(
                 result,
                 (
-                    "dark orange".to_string(),
+                    "dark orange".to_owned(),
                     vec![
-                        (3, "bright white".to_string()),
-                        (4, "muted yellow".to_string())
+                        (3, "bright white".to_owned()),
+                        (4, "muted yellow".to_owned())
                     ]
                 ),
             );
@@ -398,8 +393,8 @@ mod tests {
             assert_eq!(
                 result,
                 (
-                    "bright white".to_string(),
-                    vec![(1, "shiny gold".to_string())]
+                    "bright white".to_owned(),
+                    vec![(1, "shiny gold".to_owned())]
                 ),
             );
         }
@@ -413,8 +408,8 @@ mod tests {
             assert_eq!(
                 result,
                 (
-                    "muted yellow".to_string(),
-                    vec![(2, "shiny gold".to_string()), (9, "faded blue".to_string())]
+                    "muted yellow".to_owned(),
+                    vec![(2, "shiny gold".to_owned()), (9, "faded blue".to_owned())]
                 ),
             );
         }
@@ -428,11 +423,8 @@ mod tests {
             assert_eq!(
                 result,
                 (
-                    "shiny gold".to_string(),
-                    vec![
-                        (1, "dark olive".to_string()),
-                        (2, "vibrant plum".to_string())
-                    ]
+                    "shiny gold".to_owned(),
+                    vec![(1, "dark olive".to_owned()), (2, "vibrant plum".to_owned())]
                 ),
             );
         }
@@ -446,11 +438,8 @@ mod tests {
             assert_eq!(
                 result,
                 (
-                    "dark olive".to_string(),
-                    vec![
-                        (3, "faded blue".to_string()),
-                        (4, "dotted black".to_string())
-                    ]
+                    "dark olive".to_owned(),
+                    vec![(3, "faded blue".to_owned()), (4, "dotted black".to_owned())]
                 ),
             );
         }
@@ -464,11 +453,8 @@ mod tests {
             assert_eq!(
                 result,
                 (
-                    "vibrant plum".to_string(),
-                    vec![
-                        (5, "faded blue".to_string()),
-                        (6, "dotted black".to_string())
-                    ]
+                    "vibrant plum".to_owned(),
+                    vec![(5, "faded blue".to_owned()), (6, "dotted black".to_owned())]
                 ),
             );
         }
@@ -479,7 +465,7 @@ mod tests {
 
             let result = parse_bag_line(input);
 
-            assert_eq!(result, ("faded blue".to_string(), vec![]));
+            assert_eq!(result, ("faded blue".to_owned(), vec![]));
         }
 
         #[test]
@@ -488,7 +474,7 @@ mod tests {
 
             let result = parse_bag_line(input);
 
-            assert_eq!(result, ("dotted black".to_string(), vec![]));
+            assert_eq!(result, ("dotted black".to_owned(), vec![]));
         }
 
         #[test]

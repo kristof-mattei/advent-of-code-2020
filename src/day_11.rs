@@ -50,7 +50,7 @@ enum Thing {
 
 impl Display for Thing {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
+        match *self {
             Thing::Floor => write!(f, "."),
             Thing::EmptySeat => write!(f, "L"),
             Thing::OccupiedSeat => write!(f, "#"),
@@ -101,7 +101,7 @@ pub struct Solution {}
 
 impl Day for Solution {
     fn part_1(&self) -> PartSolution {
-        let lines: Vec<&str> = include_str!("input.txt").lines().collect();
+        let lines: Vec<&str> = include_str!("day_11/input.txt").lines().collect();
 
         let board = parse_lines(&lines);
 
@@ -111,7 +111,7 @@ impl Day for Solution {
     }
 
     fn part_2(&self) -> PartSolution {
-        let lines: Vec<&str> = include_str!("input.txt").lines().collect();
+        let lines: Vec<&str> = include_str!("day_11/input.txt").lines().collect();
 
         let board = parse_lines(&lines);
 
@@ -126,7 +126,7 @@ mod test {
     use super::Board;
 
     fn get_example() -> Vec<&'static str> {
-        include_str!("example.txt").lines().collect()
+        include_str!("day_11/example.txt").lines().collect()
     }
 
     fn pretty_print(board: &Board) -> String {
@@ -148,7 +148,7 @@ mod test {
         use crate::day_11::part_1::flip_board_part_1;
         use crate::day_11::test::{get_example, pretty_print};
         use crate::day_11::{Solution, parse_lines};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -203,7 +203,7 @@ mod test {
         use crate::day_11::part_2::flip_board_part_2;
         use crate::day_11::test::{get_example, pretty_print};
         use crate::day_11::{Solution, parse_lines};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {

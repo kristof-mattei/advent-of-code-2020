@@ -73,7 +73,7 @@ pub struct Solution {}
 
 impl Day for Solution {
     fn part_1(&self) -> PartSolution {
-        let input: Vec<u32> = include_str!("input.txt")
+        let input: Vec<u32> = include_str!("day_10/input.txt")
             .lines()
             .map(|s| s.parse::<u32>().unwrap())
             .collect();
@@ -84,7 +84,7 @@ impl Day for Solution {
     }
 
     fn part_2(&self) -> PartSolution {
-        let input: Vec<u32> = include_str!("input.txt")
+        let input: Vec<u32> = include_str!("day_10/input.txt")
             .lines()
             .map(|s| s.parse::<u32>().unwrap())
             .collect();
@@ -100,7 +100,7 @@ mod tests {
 
     mod part_1 {
         use crate::day_10::{Solution, calculate_step_up_differences};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -108,7 +108,7 @@ mod tests {
         }
 
         #[test]
-        fn test_example_1() {
+        fn example_1() {
             let input: Vec<u32> = ["16", "10", "15", "5", "1", "11", "7", "19", "6", "12", "4"]
                 .iter()
                 .map(|s| s.parse::<u32>().unwrap())
@@ -121,7 +121,7 @@ mod tests {
         }
 
         #[test]
-        fn test_example_2() {
+        fn example_2() {
             let input: Vec<u32> = vec![
                 "28", "33", "18", "42", "31", "14", "46", "20", "48", "47", "24", "23", "49", "45",
                 "19", "38", "39", "11", "1", "32", "25", "35", "8", "17", "7", "9", "4", "2", "34",
@@ -141,7 +141,7 @@ mod tests {
     mod part_2 {
 
         use crate::day_10::{Solution, calculate_possibilities};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn outcome() {
@@ -149,7 +149,7 @@ mod tests {
         }
 
         #[test]
-        fn test_example_1() {
+        fn example_1() {
             let input: Vec<u32> = ["16", "10", "15", "5", "1", "11", "7", "19", "6", "12", "4"]
                 .iter()
                 .map(|s| s.parse::<u32>().unwrap())
@@ -161,7 +161,7 @@ mod tests {
         }
 
         #[test]
-        fn test_example_2() {
+        fn example_2() {
             let input: Vec<u32> = vec![
                 "28", "33", "18", "42", "31", "14", "46", "20", "48", "47", "24", "23", "49", "45",
                 "19", "38", "39", "11", "1", "32", "25", "35", "8", "17", "7", "9", "4", "2", "34",

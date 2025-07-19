@@ -69,7 +69,7 @@ pub struct Solution {}
 
 impl Day for Solution {
     fn part_1(&self) -> PartSolution {
-        let lines = include_str!("input.txt");
+        let lines = include_str!("day_01/input.txt");
 
         let numbers = lines.lines().map(|s| s.parse::<i32>().unwrap()).collect();
 
@@ -79,7 +79,7 @@ impl Day for Solution {
     }
 
     fn part_2(&self) -> PartSolution {
-        let lines = include_str!("input.txt");
+        let lines = include_str!("day_01/input.txt");
 
         let numbers = lines.lines().map(|s| s.parse::<i32>().unwrap()).collect();
 
@@ -93,7 +93,7 @@ impl Day for Solution {
 mod tests {
     mod part_1 {
         use crate::day_01::{Solution, k_sums_unsorted};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn example() {
@@ -115,7 +115,7 @@ mod tests {
 
     mod part_2 {
         use crate::day_01::{Solution, k_sums_unsorted};
-        use crate::shared::{Day, PartSolution};
+        use crate::shared::{Day as _, PartSolution};
 
         #[test]
         fn example() {
