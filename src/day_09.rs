@@ -72,7 +72,10 @@ pub struct Solution {}
 
 impl Day for Solution {
     fn part_1(&self) -> PartSolution {
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_09/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
         let input: Vec<u64> = lines.iter().map(|s| s.parse::<u64>().unwrap()).collect();
 
         let solution = slide_until_sum_of_any_2_in_last_x_is_not_current_value(&input, 25);
@@ -82,7 +85,10 @@ impl Day for Solution {
 
     fn part_2(&self) -> PartSolution {
         const TARGET: u64 = 138_879_426; // from day 9 part 1;
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_09/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
         let input: Vec<u64> = lines.iter().map(|s| s.parse::<u64>().unwrap()).collect();
 
         let (lowest, highest) = find_contiguous_set_of_numbers_that_sum_up_to(&input, TARGET);

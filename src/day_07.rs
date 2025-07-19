@@ -153,7 +153,10 @@ pub struct Solution {}
 impl Day for Solution {
     fn part_1(&self) -> PartSolution {
         const BAG_NAME: &str = "shiny gold";
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_07/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
 
         let bags = parse_bags(&lines);
 
@@ -162,7 +165,10 @@ impl Day for Solution {
 
     fn part_2(&self) -> PartSolution {
         const BAG_NAME: &str = "shiny gold";
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_07/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
 
         let bags = parse_bags(&lines);
 

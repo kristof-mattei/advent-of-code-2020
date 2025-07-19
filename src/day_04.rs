@@ -194,7 +194,10 @@ pub struct Solution {}
 
 impl Day for Solution {
     fn part_1(&self) -> PartSolution {
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_04/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
 
         let valid_passports = parse_lines_into_groups(&lines)
             .into_iter()
@@ -205,7 +208,10 @@ impl Day for Solution {
     }
 
     fn part_2(&self) -> PartSolution {
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_04/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
 
         let valid_passports = parse_lines_into_groups(&lines)
             .into_iter()

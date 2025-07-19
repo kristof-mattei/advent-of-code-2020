@@ -21,7 +21,6 @@ fn print_answer(day: u32, part: u32, result: &str) {
     println!("Answer to Day {}, part {} is ... {}", day, part, result);
 }
 
-#[expect(clippy::todo, reason = "Seed code")]
 fn main() -> Result<(), color_eyre::Report> {
     color_eyre::install()?;
 

@@ -31,13 +31,19 @@ pub struct Solution {}
 
 impl Day for Solution {
     fn part_1(&self) -> PartSolution {
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_03/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
 
         PartSolution::U32(descent_and_go_right(&lines, 0, 0, 0, 1, 3))
     }
 
     fn part_2(&self) -> PartSolution {
-        let lines: Vec<String> = include_str!("input.txt").lines().map(Into::into).collect();
+        let lines: Vec<String> = include_str!("day_03/input.txt")
+            .lines()
+            .map(Into::into)
+            .collect();
 
         let result1 = descent_and_go_right(&lines, 0, 0, 0, 1, 1);
         let result2 = descent_and_go_right(&lines, 0, 0, 0, 1, 3);

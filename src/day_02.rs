@@ -65,7 +65,7 @@ pub struct Solution {}
 
 impl Day for Solution {
     fn part_1(&self) -> PartSolution {
-        let lines = include_str!("input.txt");
+        let lines = include_str!("day_02/input.txt");
 
         let valid_passwords = lines
             .lines()
@@ -83,7 +83,7 @@ impl Day for Solution {
     }
 
     fn part_2(&self) -> PartSolution {
-        let lines = include_str!("input.txt");
+        let lines = include_str!("day_02/input.txt");
 
         let valid_passwords = lines
             .lines()

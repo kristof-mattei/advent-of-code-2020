@@ -215,7 +215,7 @@ pub struct Solution {}
 
 impl Day for Solution {
     fn part_1(&self) -> PartSolution {
-        let lines: Vec<&str> = include_str!("input.txt").lines().collect();
+        let lines: Vec<&str> = include_str!("day_12/input.txt").lines().collect();
 
         let operations = parse_lines(&lines);
 
@@ -225,7 +225,7 @@ impl Day for Solution {
     }
 
     fn part_2(&self) -> PartSolution {
-        let lines: Vec<&str> = include_str!("input.txt").lines().collect();
+        let lines: Vec<&str> = include_str!("day_12/input.txt").lines().collect();
 
         let parsed = parse_lines(&lines);
 
@@ -238,7 +238,7 @@ impl Day for Solution {
 #[cfg(test)]
 mod test {
     fn get_example() -> Vec<&'static str> {
-        include_str!("example.txt").lines().collect()
+        include_str!("day_12/example.txt").lines().collect()
     }
 
     mod part_1 {
