@@ -68,17 +68,16 @@ impl Iterator for NeighborIteratorPart1<'_> {
                     if let (Some(r_i), Some(c_i)) = (
                         self.start_row_index.checked_sub(1),
                         self.start_col_index.checked_sub(1),
-                    ) {
-                        if self.board.v_now[r_i][c_i] != Thing::Floor {
-                            return Some((r_i, c_i));
-                        }
+                    ) && self.board.v_now[r_i][c_i] != Thing::Floor
+                    {
+                        return Some((r_i, c_i));
                     }
                 },
                 Direction::Top => {
-                    if let Some(r_i) = self.start_row_index.checked_sub(1) {
-                        if self.board.v_now[r_i][self.start_col_index] != Thing::Floor {
-                            return Some((r_i, self.start_col_index));
-                        }
+                    if let Some(r_i) = self.start_row_index.checked_sub(1)
+                        && self.board.v_now[r_i][self.start_col_index] != Thing::Floor
+                    {
+                        return Some((r_i, self.start_col_index));
                     }
                 },
                 Direction::TopRight => {
@@ -86,19 +85,17 @@ impl Iterator for NeighborIteratorPart1<'_> {
                         self.start_row_index.checked_sub(1),
                         (self.start_col_index + 1 < self.board.number_of_cols)
                             .then_some(self.start_col_index + 1),
-                    ) {
-                        if self.board.v_now[r_i][c_i] != Thing::Floor {
-                            return Some((r_i, c_i));
-                        }
+                    ) && self.board.v_now[r_i][c_i] != Thing::Floor
+                    {
+                        return Some((r_i, c_i));
                     }
                 },
                 Direction::Right => {
                     if let Some(c_i) = (self.start_col_index + 1 < self.board.number_of_cols)
                         .then_some(self.start_col_index + 1)
+                        && self.board.v_now[self.start_row_index][c_i] != Thing::Floor
                     {
-                        if self.board.v_now[self.start_row_index][c_i] != Thing::Floor {
-                            return Some((self.start_row_index, c_i));
-                        }
+                        return Some((self.start_row_index, c_i));
                     }
                 },
 
@@ -108,19 +105,17 @@ impl Iterator for NeighborIteratorPart1<'_> {
                             .then_some(self.start_row_index + 1),
                         (self.start_col_index + 1 < self.board.number_of_cols)
                             .then_some(self.start_col_index + 1),
-                    ) {
-                        if self.board.v_now[r_i][c_i] != Thing::Floor {
-                            return Some((r_i, c_i));
-                        }
+                    ) && self.board.v_now[r_i][c_i] != Thing::Floor
+                    {
+                        return Some((r_i, c_i));
                     }
                 },
                 Direction::Bottom => {
                     if let Some(r_i) = (self.start_row_index + 1 < self.board.number_of_rows)
                         .then_some(self.start_row_index + 1)
+                        && self.board.v_now[r_i][self.start_col_index] != Thing::Floor
                     {
-                        if self.board.v_now[r_i][self.start_col_index] != Thing::Floor {
-                            return Some((r_i, self.start_col_index));
-                        }
+                        return Some((r_i, self.start_col_index));
                     }
                 },
                 Direction::BottomLeft => {
@@ -128,17 +123,16 @@ impl Iterator for NeighborIteratorPart1<'_> {
                         (self.start_row_index + 1 < self.board.number_of_rows)
                             .then_some(self.start_row_index + 1),
                         self.start_col_index.checked_sub(1),
-                    ) {
-                        if self.board.v_now[r_i][c_i] != Thing::Floor {
-                            return Some((r_i, c_i));
-                        }
+                    ) && self.board.v_now[r_i][c_i] != Thing::Floor
+                    {
+                        return Some((r_i, c_i));
                     }
                 },
                 Direction::Left => {
-                    if let Some(c_i) = self.start_col_index.checked_sub(1) {
-                        if self.board.v_now[self.start_row_index][c_i] != Thing::Floor {
-                            return Some((self.start_row_index, c_i));
-                        }
+                    if let Some(c_i) = self.start_col_index.checked_sub(1)
+                        && self.board.v_now[self.start_row_index][c_i] != Thing::Floor
+                    {
+                        return Some((self.start_row_index, c_i));
                     }
                 },
             }
