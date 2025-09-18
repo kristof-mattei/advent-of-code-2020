@@ -5,7 +5,7 @@ fn parse_lines_part_1(lines: &[&str]) -> (usize, Vec<usize>) {
 
     let buses = lines[1]
         .split(',')
-        .filter(|&v| (v != "x"))
+        .filter(|&v| v != "x")
         .map(|v| v.parse::<usize>().unwrap())
         .collect::<Vec<_>>();
 
@@ -16,7 +16,7 @@ fn parse_lines_part_2(lines: &[&str]) -> Vec<(usize, usize)> {
     let buses = lines[1]
         .split(',')
         .enumerate()
-        .filter(|&(_, v)| (v != "x"))
+        .filter(|&(_, v)| v != "x")
         .map(|(i, v)| (i, v.parse::<usize>().unwrap()))
         .collect::<Vec<_>>();
 
