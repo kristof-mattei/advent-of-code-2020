@@ -17,6 +17,9 @@ mod day_11;
 mod day_12;
 mod day_13;
 
+#[global_allocator]
+static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+
 fn print_answer(day: u32, part: u32, result: &str) {
     println!("Answer to Day {}, part {} is ... {}", day, part, result);
 }
