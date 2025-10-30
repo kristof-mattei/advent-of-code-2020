@@ -55,6 +55,7 @@ fn is_valid_height(
     minimum_inclusive: u32,
     maximum_inclusive: u32,
 ) -> bool {
+    #[expect(clippy::string_slice, reason = "Advent of Code is ASCII only")]
     if height_as_string.ends_with(suffix) {
         matches!(height_as_string[0..(height_as_string.len() - suffix.len())].parse::<u32>(), Ok(height) if height >= minimum_inclusive && height <= maximum_inclusive)
     } else {
