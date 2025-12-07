@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use hashbrown::HashMap;
 
 use crate::shared::{Day, PartSolution};
 
@@ -39,10 +39,6 @@ fn count_of_questions_answered_by_everybody(group: &[String]) -> u32 {
     let mut total_answers_that_everybody_answered: u32 = 0;
     let people_in_group = group.len().try_into().unwrap();
 
-    #[expect(
-        clippy::iter_over_hash_type,
-        reason = "We go through all of them, sorting is redundant"
-    )]
     for (_, value) in count_of_answers {
         if value == people_in_group {
             total_answers_that_everybody_answered += 1;

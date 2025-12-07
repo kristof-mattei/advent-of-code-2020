@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use hashbrown::HashMap;
 
 use crate::shared::{Day, PartSolution};
 
@@ -11,7 +11,7 @@ struct RuleWithPasswordPart1 {
 
 impl RuleWithPasswordPart1 {
     pub fn is_valid(&self) -> bool {
-        let mut counts: HashMap<char, u32> = HashMap::new();
+        let mut counts = HashMap::new();
 
         self.password.chars().for_each(|c| {
             counts.entry(c).and_modify(|e| *e += 1).or_insert(1);

@@ -13,6 +13,11 @@ include = ["src/**", "/LICENSE", "/LICENSE-*"]
 
 [dependencies]
 color-eyre = "0.6.5"
+hashbrown = { version = "0.16.1", default-features = false, features = [
+    "default-hasher",
+    "inline-more",
+    "equivalent",
+] }
 mimalloc = { version = "0.1.48", features = ["v3"] }
 
 [lints.clippy]

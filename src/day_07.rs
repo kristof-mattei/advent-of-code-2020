@@ -1,7 +1,8 @@
 use core::fmt;
 use std::cell::RefCell;
-use std::collections::HashMap;
 use std::rc::Rc;
+
+use hashbrown::HashMap;
 
 use crate::shared::{Day, PartSolution};
 
