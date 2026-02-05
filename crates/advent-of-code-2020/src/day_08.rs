@@ -143,6 +143,8 @@ impl Day for Solution {
 mod tests {
 
     mod part_1 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_08::{
             Ended, Operation, Solution, execute_until_same_line_reached, parse_lines,
         };
@@ -245,6 +247,8 @@ mod tests {
     }
 
     mod part_2 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_08::{
             Ended, Solution, build_new_vector, execute_until_same_line_reached, parse_lines,
         };

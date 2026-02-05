@@ -14,7 +14,7 @@ impl RuleWithPasswordPart1 {
         let mut counts = HashMap::new();
 
         self.password.chars().for_each(|c| {
-            counts.entry(c).and_modify(|e| *e += 1).or_insert(1);
+            counts.entry(c).and_modify(|v| *v += 1).or_insert(1);
         });
 
         match counts.get(&self.character) {
@@ -106,6 +106,8 @@ impl Day for Solution {
 #[cfg(test)]
 mod tests {
     mod part_1 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_02::Solution;
         use crate::shared::{Day as _, PartSolution};
 
@@ -116,6 +118,8 @@ mod tests {
     }
 
     mod part_2 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_02::Solution;
         use crate::shared::{Day as _, PartSolution};
 

@@ -76,9 +76,10 @@ impl Passport {
             _ => false,
         }
     }
+
     fn is_eyr_valid(&self) -> bool {
         match &self.eyr {
-            &Some(ref eyr) => matches!(eyr.parse::<u32>(), Ok(e) if (2020..=2030).contains(&e)),
+            &Some(ref eyr) => matches!(eyr.parse::<u32>(), Ok(y) if (2020..=2030).contains(&y)),
             _ => false,
         }
     }
@@ -226,6 +227,8 @@ impl Day for Solution {
 #[cfg(test)]
 mod tests {
     mod part_1 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_04::Solution;
         use crate::shared::{Day as _, PartSolution};
 
@@ -237,6 +240,8 @@ mod tests {
 
     #[cfg(test)]
     mod part_2 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_04::{Passport, Solution, parse_line_group};
         use crate::shared::{Day as _, PartSolution};
 

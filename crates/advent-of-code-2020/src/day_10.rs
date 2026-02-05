@@ -99,6 +99,8 @@ impl Day for Solution {
 mod tests {
 
     mod part_1 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_10::{Solution, calculate_step_up_differences};
         use crate::shared::{Day as _, PartSolution};
 
@@ -139,6 +141,7 @@ mod tests {
     }
 
     mod part_2 {
+        use pretty_assertions::assert_eq;
 
         use crate::day_10::{Solution, calculate_possibilities};
         use crate::shared::{Day as _, PartSolution};

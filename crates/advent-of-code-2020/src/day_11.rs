@@ -145,6 +145,8 @@ mod test {
     }
 
     mod part_1 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_11::part_1::flip_board_part_1;
         use crate::day_11::test::{get_example, pretty_print};
         use crate::day_11::{Solution, parse_lines};
@@ -200,6 +202,8 @@ mod test {
     }
 
     mod part_2 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_11::part_2::flip_board_part_2;
         use crate::day_11::test::{get_example, pretty_print};
         use crate::day_11::{Solution, parse_lines};

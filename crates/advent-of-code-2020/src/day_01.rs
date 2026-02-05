@@ -92,6 +92,8 @@ impl Day for Solution {
 #[cfg(test)]
 mod tests {
     mod part_1 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_01::{Solution, k_sums_unsorted};
         use crate::shared::{Day as _, PartSolution};
 
@@ -114,6 +116,8 @@ mod tests {
     }
 
     mod part_2 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_01::{Solution, k_sums_unsorted};
         use crate::shared::{Day as _, PartSolution};
 

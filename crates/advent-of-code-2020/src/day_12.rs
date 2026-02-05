@@ -242,6 +242,8 @@ mod test {
     }
 
     mod part_1 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_12::test::get_example;
         use crate::day_12::{Solution, parse_lines, pilot};
         use crate::shared::{Day as _, PartSolution};
@@ -264,6 +266,8 @@ mod test {
     }
 
     mod part_2 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_12::test::get_example;
         use crate::day_12::{Solution, parse_lines, pilot_part_2};
         use crate::shared::{Day as _, PartSolution};
