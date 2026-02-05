@@ -15,6 +15,7 @@ fn parse_group_of_answers(group: &[String]) -> u32 {
     answers.len().try_into().unwrap()
 }
 
+#[expect(clippy::disallowed_macros, reason = "No pretty needed in actual code")]
 fn count_of_questions_answered_by_everybody(group: &[String]) -> u32 {
     let mut count_of_answers: HashMap<char, u32> = HashMap::new();
 
@@ -23,8 +24,9 @@ fn count_of_questions_answered_by_everybody(group: &[String]) -> u32 {
         duplicate_answer_per_line_check.sort_unstable();
         duplicate_answer_per_line_check.dedup();
 
-        assert!(
-            duplicate_answer_per_line_check.len() == line.len(),
+        assert_eq!(
+            duplicate_answer_per_line_check.len(),
+            line.len(),
             "Length doesn't match duplicate answer"
         );
 
