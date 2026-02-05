@@ -23,9 +23,8 @@ fn count_of_questions_answered_by_everybody(group: &[String]) -> u32 {
         duplicate_answer_per_line_check.sort_unstable();
         duplicate_answer_per_line_check.dedup();
 
-        assert_eq!(
-            duplicate_answer_per_line_check.len(),
-            line.len(),
+        assert!(
+            duplicate_answer_per_line_check.len() == line.len(),
             "Length doesn't match duplicate answer"
         );
 
@@ -93,6 +92,8 @@ impl Day for Solution {
 #[cfg(test)]
 mod tests {
     mod part_1 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_06::{Solution, parse_group_of_answers};
         use crate::shared::{Day as _, PartSolution};
 
@@ -143,6 +144,8 @@ mod tests {
     }
 
     mod part_2 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_06::{Solution, count_of_questions_answered_by_everybody};
         use crate::shared::{Day as _, PartSolution};
 

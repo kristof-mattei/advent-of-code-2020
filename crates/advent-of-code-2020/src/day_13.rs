@@ -81,11 +81,14 @@ impl Day for Solution {
 
 #[cfg(test)]
 mod test {
+
     fn get_example() -> Vec<&'static str> {
         include_str!("day_13/example.txt").lines().collect()
     }
 
     mod part_1 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_13::test::get_example;
         use crate::day_13::{Solution, find_closest, parse_lines_part_1};
         use crate::shared::{Day as _, PartSolution};
@@ -108,6 +111,8 @@ mod test {
     }
 
     mod part_2 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_13::test::get_example;
         use crate::day_13::{Solution, find_one_minute_apart, parse_lines_part_2};
         use crate::shared::{Day as _, PartSolution};

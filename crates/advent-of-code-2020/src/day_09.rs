@@ -101,6 +101,8 @@ impl Day for Solution {
 mod tests {
 
     mod part_1 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_09::{Solution, slide_until_sum_of_any_2_in_last_x_is_not_current_value};
         use crate::shared::{Day as _, PartSolution};
 
@@ -126,6 +128,8 @@ mod tests {
     }
 
     mod part_2 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_09::{Solution, find_contiguous_set_of_numbers_that_sum_up_to};
         use crate::shared::{Day as _, PartSolution};
 

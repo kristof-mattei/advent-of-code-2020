@@ -181,6 +181,8 @@ impl Day for Solution {
 mod tests {
 
     mod part_1 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_07::{Solution, count_parents, parse_bag_line, parse_bags};
         use crate::shared::{Day as _, PartSolution};
 
@@ -341,6 +343,8 @@ mod tests {
     }
 
     mod part_2 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_07::{Solution, count_bags_recursive, parse_bag_line, parse_bags};
         use crate::shared::{Day as _, PartSolution};
 

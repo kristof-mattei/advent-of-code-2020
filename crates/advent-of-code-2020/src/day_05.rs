@@ -82,6 +82,8 @@ impl Day for Solution {
 #[cfg(test)]
 mod tests {
     mod part_1 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_05::{Solution, parse_seat};
         use crate::shared::{Day as _, PartSolution};
 
@@ -120,6 +122,8 @@ mod tests {
 
     #[cfg(test)]
     mod part_2 {
+        use pretty_assertions::assert_eq;
+
         use crate::day_05::{Solution, parse_seat};
         use crate::shared::{Day as _, PartSolution};
 
