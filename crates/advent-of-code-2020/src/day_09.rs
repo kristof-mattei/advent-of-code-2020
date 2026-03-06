@@ -26,11 +26,11 @@ fn find_sum_of_2_is(sum: u64, rest: &[u64]) -> Result<(), String> {
     ))
 }
 
-fn slide_until_sum_of_any_2_in_last_x_is_not_current_value(input: &[u64], last_x: usize) -> u64 {
+fn slide_until_sum_of_any_2_in_last_x_is_not_current_value<const N: usize>(input: &[u64]) -> u64 {
     let mut offset = 0;
 
-    for to_test in input.windows(last_x) {
-        let target_sum = *input.get(offset + last_x).unwrap();
+    for to_test in input.array_windows::<N>() {
+        let target_sum = *input.get(offset + N).unwrap();
 
         if find_sum_of_2_is(target_sum, to_test).is_ok() {
             offset += 1;
@@ -78,7 +78,7 @@ impl Day for Solution {
             .collect();
         let input: Vec<u64> = lines.iter().map(|s| s.parse::<u64>().unwrap()).collect();
 
-        let solution = slide_until_sum_of_any_2_in_last_x_is_not_current_value(&input, 25);
+        let solution = slide_until_sum_of_any_2_in_last_x_is_not_current_value::<25>(&input);
 
         PartSolution::U64(solution)
     }
@@ -121,7 +121,7 @@ mod tests {
             .map(|s| s.parse::<u64>().unwrap())
             .collect();
 
-            let value = slide_until_sum_of_any_2_in_last_x_is_not_current_value(&input, 5);
+            let value = slide_until_sum_of_any_2_in_last_x_is_not_current_value::<5>(&input);
 
             assert_eq!(127, value);
         }
