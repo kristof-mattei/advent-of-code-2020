@@ -16,11 +16,16 @@ default = []
 
 [dependencies]
 color-eyre = "0.6.5"
+<<<<<<< HEAD:crates/advent-of-code-2020/Cargo.toml
 hashbrown = { version = "0.17.0", default-features = false, features = [
     "default-hasher",
     "equivalent",
     "inline-more",
 ] }
+||||||| 553888ab:crates/rust-seed/Cargo.toml
+mimalloc = "0.1.49"
+=======
+>>>>>>> upstream/main:crates/rust-seed/Cargo.toml
 mimalloc = "0.1.50"
 
 [dev-dependencies]
