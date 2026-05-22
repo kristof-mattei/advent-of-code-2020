@@ -21,7 +21,7 @@ hashbrown = { version = "0.17.1", default-features = false, features = [
     "equivalent",
     "inline-more",
 ] }
-mimalloc = "0.1.51"
+mimalloc = "0.1.52"
 
 [dev-dependencies]
 pretty_assertions = "=1.4.1"
