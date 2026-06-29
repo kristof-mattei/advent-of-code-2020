@@ -15,13 +15,13 @@ include.workspace = true
 default = []
 
 [dependencies]
-color-eyre = "0.6.5"
-hashbrown = { version = "0.17.1", default-features = false, features = [
+color-eyre = "=0.6.5"
+hashbrown = { version = "=0.17.1", default-features = false, features = [
     "default-hasher",
     "equivalent",
     "inline-more",
 ] }
-mimalloc = "0.1.52"
+mimalloc = "=0.1.52"
 
 [dev-dependencies]
 pretty_assertions = "=1.4.1"
