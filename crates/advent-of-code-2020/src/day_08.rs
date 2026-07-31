@@ -156,7 +156,7 @@ mod tests {
         }
 
         #[test]
-        fn nop_postive() {
+        fn nop_positive() {
             let input = vec!["nop +1".to_owned()];
 
             let expected = Operation::Nop(1);
