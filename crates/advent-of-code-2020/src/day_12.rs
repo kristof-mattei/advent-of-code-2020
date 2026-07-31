@@ -16,7 +16,7 @@ fn parse_lines(lines: &[&str]) -> Vec<Operation> {
             b'L' => Operation::RotateLeft(v),
             b'R' => Operation::RotateRight(v),
             b'F' => Operation::MoveForward(v),
-            _ => panic!("AT THE DISCOTEQUE"),
+            _ => panic!("AT THE DISCOTHEQUE"),
         };
 
         result.push(operation);

@@ -9,7 +9,6 @@ Cinstrument
 cocogitto
 Ctarget
 cves
-DISCOTEQUE
 dorny
 endfor
 endmacro
