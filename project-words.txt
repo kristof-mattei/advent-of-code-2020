@@ -31,8 +31,6 @@ nextest
 nums
 nvmrc
 pathbuf
-pids
-postive
 postprocessors
 prereleased
 profraw
