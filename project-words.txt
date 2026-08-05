@@ -5,9 +5,10 @@ BBFFBBFRLL
 BFFFBBFRRR
 bkeepers
 buildcache
-Cinstrument
+cinstrument
 cocogitto
-Ctarget
+ctarget
+cttc
 cves
 dorny
 endfor
@@ -33,8 +34,9 @@ pathbuf
 postprocessors
 prereleased
 profraw
-Retag
-Retagging
+pyflakes
+retag
+retagging
 rustflags
 samply
 sccache
@@ -43,9 +45,9 @@ skopeo
 startswith
 striptags
 taiki
-TARGETPLATFORMDASH
+targetplatformdash
 telem
-Tera
+tera
 topo
 trixie
 uninlined
