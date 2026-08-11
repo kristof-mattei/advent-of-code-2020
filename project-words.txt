@@ -6,7 +6,6 @@ BFFFBBFRRR
 bkeepers
 buildcache
 cinstrument
-cocogitto
 ctarget
 cttc
 cves
@@ -50,6 +49,7 @@ telem
 tera
 topo
 trixie
+TRUNC
 uninlined
 unseparated
 usernamehw
