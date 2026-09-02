@@ -6,6 +6,7 @@ bfffbbfrrr
 bkeepers
 buildcache
 cinstrument
+cliffignore
 ctarget
 cves
 dorny
@@ -19,12 +20,10 @@ haircolor
 hubot
 idents
 kristof
-lldb
 mattei
 mimalloc
 monomorphization
 multiplatform
-mypy
 nextest
 nums
 pathbuf
@@ -32,6 +31,7 @@ postprocessors
 prereleased
 profraw
 pyflakes
+rawfile
 retag
 retagging
 rhysd
@@ -41,6 +41,7 @@ sccache
 shhh
 skopeo
 skopeo's
+slurpfile
 startswith
 striptags
 taiki
