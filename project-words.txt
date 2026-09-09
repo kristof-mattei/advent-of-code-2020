@@ -20,6 +20,7 @@ haircolor
 hubot
 idents
 kristof
+lintian
 mattei
 mimalloc
 monomorphization
