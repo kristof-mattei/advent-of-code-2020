@@ -26,6 +26,7 @@ monomorphization
 multiplatform
 nextest
 nums
+oras
 pathbuf
 postprocessors
 prereleased
